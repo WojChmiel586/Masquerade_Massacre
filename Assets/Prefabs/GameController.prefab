@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8d909b17d44b2ab8f261afddf109ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.GameController
-  roundTimeLimit: 0
-  assassinTimerMin: 60
-  assassinTimerMax: 45
+  roundTimeLimit: 120
+  assassinTimerMin: 45
+  assassinTimerMax: 25
   setLose: 0
   setWin: 0
 --- !u!1 &7661781142897747172

@@ -125,8 +125,7 @@ namespace DefaultNamespace
         private void FindNewTarget()
         {
             //  Find a new assassin target and set a new assassin timer
-            roundTimeLimit = Random.Range(assassinTimerMin, assassinTimerMax);
-            roundTimer = roundTimeLimit;
+            assassinTimer = Random.Range(assassinTimerMin, assassinTimerMax);
             Debug.Log("Assigning new target.");
         }
 
@@ -137,8 +136,16 @@ namespace DefaultNamespace
             switch (newState)
             {
                 case GameState.Playing:
+                    if (oldState is GameState.Menu)
+                    {
+                        roundTimer = roundTimeLimit;
+                        assassinTimer = 99f;
+                        //FindNewTarget();
+                    }
+                    Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Paused:
+                    Cursor.lockState = CursorLockMode.None;
                     if (oldState is GameState.Playing or GameState.Initialising)
                     {
                         if (CurrentTargetState is TargetState.INACTIVE or TargetState.KIA)
@@ -149,12 +156,15 @@ namespace DefaultNamespace
 
                     break;
                 case GameState.Lose:
+                    Cursor.lockState = CursorLockMode.None;
                     UIManager.Instance.ShowPanel("LosePanel");
                     break;
                 case GameState.Win:
+                    Cursor.lockState = CursorLockMode.None;
                     UIManager.Instance.ShowPanel("WinPanel");
                     break;
                 case GameState.Menu:
+                    Cursor.lockState = CursorLockMode.None;
                     UIManager.Instance.ShowPanel("MenuPanel");
                     break;
                 default:

@@ -1,3 +1,5 @@
+using System.Net.Mime;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace UI
@@ -11,27 +13,28 @@ namespace UI
         {
             base.OnShow();
             retryButton = uiObject.Q<Button>("Button_PlayAgain");
-            retryButton.clickable.clicked += OnRetryButtonClicked;  
+            retryButton.RegisterCallback<ClickEvent>(OnRetryButtonClicked);
             quitButton = uiObject.Q<Button>("Button_Quit");
-            quitButton.clickable.clicked += OnQuitButtonClicked;
+            quitButton.RegisterCallback<ClickEvent>(OnQuitButtonClicked);
         }
 
         public override void OnHide()
         {
             base.OnHide();
-            if (retryButton != null) retryButton.clickable.clicked -= OnRetryButtonClicked;  
-            if (quitButton != null) quitButton.clickable.clicked -= OnQuitButtonClicked;
+            retryButton?.UnregisterCallback<ClickEvent>(OnRetryButtonClicked);
+            quitButton?.UnregisterCallback<ClickEvent>(OnQuitButtonClicked);
         }
 
-        private void OnRetryButtonClicked()
+        private void OnRetryButtonClicked(ClickEvent evt)
         {
             HidePanel();
             //  Restart level
         }
 
-        private void OnQuitButtonClicked()
+        private void OnQuitButtonClicked(ClickEvent evt)
         {
             HidePanel();
+            Application.Quit();
             //  Load to menu
         }
     }

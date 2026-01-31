@@ -31,7 +31,6 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
 
-        Cursor.lockState = CursorLockMode.Locked;
         m_Action = m_input.actions.FindAction("Look");
         m_MainCam = Camera.main;
         m_ContactFilter.layerMask = m_ScopeLayer;
