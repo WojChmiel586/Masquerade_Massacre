@@ -1287,7 +1287,7 @@ MonoBehaviour:
   - {fileID: 144990713}
   - {fileID: 930555399}
   m_AgentPrefab: {fileID: 2259472768862001461, guid: 3fbc4475c9dceb44c8469f7e457f8601, type: 3}
-  m_MaxAgents: 400
+  m_MaxAgents: 25
 --- !u!114 &1469667353
 MonoBehaviour:
   m_ObjectHideFlags: 0
