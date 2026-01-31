@@ -3,11 +3,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using System.Collections.Generic;
+using DefaultNamespace;
 
 public class PlayerScript : MonoBehaviour
 {
     public GameObject m_ScopeOverlay;
     public GameObject m_Scope;
+    public GameObject m_ScopeSprite;
     public CinemachineCamera m_UnscopedCamera;
     public CinemachineCamera m_ScopedCamera;
     public PlayerInput m_input;
@@ -30,8 +32,6 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
-
-        Cursor.lockState = CursorLockMode.Locked;
         m_Action = m_input.actions.FindAction("Look");
         m_MainCam = Camera.main;
         m_ContactFilter.layerMask = m_ScopeLayer;
@@ -48,18 +48,18 @@ public class PlayerScript : MonoBehaviour
     {
         if (context.started)
         {
-            m_ScopeOverlay.SetActive(true);
             m_scopedIn = true;
-
         }
-
         if (context.canceled)
         {
-            m_ScopeOverlay.SetActive(false);
             m_scopedIn = false;
         }
+
+
+        m_ScopeOverlay.SetActive(m_scopedIn);
         m_UnscopedCamera.gameObject.SetActive(!m_scopedIn);
         m_ScopedCamera.gameObject.SetActive(m_scopedIn);
+        m_ScopeSprite.SetActive(m_scopedIn);
 
     }
 
@@ -111,9 +111,7 @@ public class PlayerScript : MonoBehaviour
                     }
 
                 }
-
-                gunTarget.gameObject.SetActive(false);
-                Debug.Log("hitSomething");
+                gunTarget.transform.GetComponentInParent<PatrolAgent2D>().m_FlagForDeletion = true;
             }
         }
 

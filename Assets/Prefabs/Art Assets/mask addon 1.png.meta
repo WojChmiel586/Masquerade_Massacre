@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 2fb5bcfad122bf240aeaab0dfa96194b
+guid: 0055cde8035254a47a20fac24cd75c98
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8703799121822822345
-    second: A8896C20-09BA-4EAF-8C20-80D883BCB670_0
+      213: -8909689829135719665
+    second: mask addon 1_0
+  - first:
+      213: 176037337206104091
+    second: mask addon 1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: A8896C20-09BA-4EAF-8C20-80D883BCB670_0
+      name: mask addon 1_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 84
-        width: 831
-        height: 832
+        x: 265
+        y: 376
+        width: 148
+        height: 247
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +144,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9cf2b94cf2b1ac870800000000000000
-      internalID: 8703799121822822345
+      spriteID: f0364735e4c6a5480800000000000000
+      internalID: -8909689829135719665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mask addon 1_1
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 376
+        width: 148
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1020678609617200800000000000000
+      internalID: 176037337206104091
       vertices: []
       indices: 
       edges: []
@@ -151,7 +176,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      A8896C20-09BA-4EAF-8C20-80D883BCB670_0: 8703799121822822345
+      mask addon 1_0: -8909689829135719665
+      mask addon 1_1: 176037337206104091
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
