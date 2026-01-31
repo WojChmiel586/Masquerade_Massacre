@@ -14,13 +14,33 @@ public class UiPanel : MonoBehaviour
 
     void Start()
     {
-        UIManager.Instance.RegisterPanel(panelName, gameObject);
+        UIManager.Instance.RegisterPanel(panelName, this);
+        HidePanel();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ToggleUi()
+    {
+        if (gameObject.activeSelf) 
+            HidePanel();
+        else 
+            ShowPanel();
+    }
+    public void ShowPanel()
+    {
+        gameObject.SetActive(true);
+        OnShow();
+    }
+
+    public void HidePanel()
+    {
+        gameObject.SetActive(false);
+        OnHide();
     }
 
     // Called when the panel is shown

@@ -15,10 +15,13 @@ public class PlayerScript : MonoBehaviour
     float m_cameraCurrentSize = 0;
     float m_cameraTargetSize = 0;
 
+    PlayerInput m_playerInput;
     void Start()
     {
         m_cameraCurrentSize = CAMERA_UNSCOPED_SIZE;
         m_cameraTargetSize = CAMERA_UNSCOPED_SIZE;
+        m_playerInput = GetComponent<PlayerInput>();
+        m_playerInput.SwitchCurrentActionMap("Player");
     }
 
 

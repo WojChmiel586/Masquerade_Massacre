@@ -2,10 +2,14 @@
     opacity: 1;
 }
 
+
+
 .MissionPanel {
-    background-color: rgb(93, 255, 0);
+    background-color: rgb(123, 83, 46);
     opacity: 1;
-    transition-property: bottom, visibility;
-    transition-timing-function: ease-in, ease;
-    transition-duration: 1s, 0s;
+    transition-property: bottom;
+    transition-timing-function: ease-in;
+    transition-duration: 1s;
+    flex-grow: 1;
+    margin-top: 50px;
 }

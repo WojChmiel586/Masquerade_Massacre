@@ -12,19 +12,21 @@ namespace UI
         public override void OnShow()
         {
             base.OnShow();
-            //returnButton = uiObject.
+            if (returnButton == null) returnButton = uiObject.Q<Button>("ReturnButton");
         }
 
         public override void OnHide()
         {
-            //     base.OnHide();
-            // }
+            if (returnButton != null)
+            {
+                Debug.Log("Btw: " + returnButton.name);
+            }
         }
 
-        [SerializeField] private InputAction.CallbackContext test;
-
-        private void LateUpdate()
+        private void OnReturnButtonClicked()
         {
+            HidePanel();
         }
+        
     }
 }
