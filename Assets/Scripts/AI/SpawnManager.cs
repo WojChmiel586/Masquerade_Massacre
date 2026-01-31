@@ -16,6 +16,14 @@ public class SpawnManager : MonoBehaviour
 
 	[SerializeField] InputAction.CallbackContext m_CallbackSpace;
 
+	[Header( "Guest Components" )]
+	public List<Sprite> m_Masks = new();
+	public List<Sprite> m_Bodies = new();
+	public List<Sprite> m_HandsL = new();
+	public List<Sprite> m_HandsR = new();
+	public List<UnityEngine.Color> m_MaskColours = new();
+
+
 	void Awake()
 	{
 		m_PatrolManager = GetComponent<PatrolManager2D>();
@@ -40,6 +48,16 @@ public class SpawnManager : MonoBehaviour
 		PatrolAgent2D xAgentPatrol = xNewAgent.GetComponent<PatrolAgent2D>();
 		int iPatrolAreaIndex = Random.Range( 0, m_PatrolAreas.Count );
 		xAgentPatrol.m_PatrolArea = m_PatrolAreas[ iPatrolAreaIndex ];
+		int iBodyType = Random.Range( 0, m_Bodies.Count );
+
+		xNewAgent.GetComponent<GuestDesignController>().SetGuestElements(
+			m_Masks[ Random.Range( 0, m_Masks.Count ) ],
+			m_Bodies[ iBodyType ],
+			m_HandsL[ iBodyType ],
+			m_HandsR[ iBodyType ],
+			m_MaskColours[ Random.Range( 0, m_MaskColours.Count ) ],
+			UnityEngine.Color.blue
+			);
 
 		// Double check that the agent is assigned a patrol area
 		if ( xAgentPatrol.m_PatrolArea == null )

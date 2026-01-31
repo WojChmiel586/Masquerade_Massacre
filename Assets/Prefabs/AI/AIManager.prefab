@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1835054890253413273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5185918443662424550}
+  - component: {fileID: 1050986009719685469}
+  - component: {fileID: 1939588533262335436}
+  - component: {fileID: 4567099154814403427}
+  m_Layer: 0
+  m_Name: AIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5185918443662424550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835054890253413273}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1050986009719685469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835054890253413273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44edbc710275ee42b12ad5800825407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PatrolManager2D
+  m_Agents: []
+  m_MaxAgentsToThinkPerFrame: 20
+--- !u!114 &1939588533262335436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835054890253413273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e5aab52133faa4f8e3998b249b4dc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  m_PatrolAreas:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_SpawnAreas:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_AgentPrefab: {fileID: 2259472768862001461, guid: 3fbc4475c9dceb44c8469f7e457f8601, type: 3}
+  m_MaxAgents: 50
+  m_Masks:
+  - {fileID: -3322797646964864792, guid: 4eb1e6b2999725941b438924f84732d3, type: 3}
+  - {fileID: -3204344925240187614, guid: 96bdc4184784ff640aacf6a13c03c98b, type: 3}
+  - {fileID: -7961992397514568717, guid: 9a111cb32518f914e9f6a8a7938fcc65, type: 3}
+  - {fileID: 6787179030169607450, guid: 58461b253a5ea0a48ace60818f7bb554, type: 3}
+  m_Bodies:
+  - {fileID: -3878375589434991295, guid: c66ae2833b55b0a45a47ece1e07a9633, type: 3}
+  - {fileID: 7411579709113585816, guid: 0d2ed0de72e638a4aaad60867c65f531, type: 3}
+  - {fileID: 7839750059904897675, guid: cecd8b538f0ee754faac85a965806db1, type: 3}
+  - {fileID: -4586595811736584973, guid: 51428cec78577934c9bf7e0dd7f29093, type: 3}
+  m_HandsL:
+  - {fileID: 5576629542773965713, guid: bd210737ff7d3044fa94c6379eb0f9e9, type: 3}
+  - {fileID: 5576629542773965713, guid: bd210737ff7d3044fa94c6379eb0f9e9, type: 3}
+  - {fileID: 5705110457454821009, guid: 07a97ec27e917e74793b1588d05e9ef9, type: 3}
+  - {fileID: 5705110457454821009, guid: 07a97ec27e917e74793b1588d05e9ef9, type: 3}
+  m_HandsR:
+  - {fileID: -225073500391129520, guid: bd210737ff7d3044fa94c6379eb0f9e9, type: 3}
+  - {fileID: -225073500391129520, guid: bd210737ff7d3044fa94c6379eb0f9e9, type: 3}
+  - {fileID: 1013891409282876557, guid: 07a97ec27e917e74793b1588d05e9ef9, type: 3}
+  - {fileID: 1013891409282876557, guid: 07a97ec27e917e74793b1588d05e9ef9, type: 3}
+  m_MaskColours:
+  - {r: 1, g: 0.4687288, b: 0, a: 1}
+  - {r: 0.9622642, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.8160639, a: 1}
+  - {r: 0, g: 0.6981132, b: 0.13689534, a: 1}
+  - {r: 0.7182925, g: 0, b: 0.72955966, a: 1}
+--- !u!114 &4567099154814403427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835054890253413273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

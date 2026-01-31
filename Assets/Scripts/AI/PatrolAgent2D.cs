@@ -23,6 +23,9 @@ public class PatrolAgent2D : MonoBehaviour
 	public Vector2 m_ThinkIntervalRange = new Vector2( 0.25f, 0.6f ); // decision cadence (not movement)
 	[HideInInspector] public float m_NextThinkTime;
 
+	[Header("Debug")]
+	public bool m_Debug;
+
 	public State m_CurrentState { get; private set; } = State.IDLE;
 
 	public bool m_FlagForDeletion = false;
@@ -31,10 +34,12 @@ public class PatrolAgent2D : MonoBehaviour
 	Vector2 m_Target;
 	float m_IdleUntil;
 	SpriteRenderer m_SpriteRenderer;
+	Animator m_Animator;
 
 	void Start()
 	{
 		m_RigidBody = GetComponent<Rigidbody2D>();
+		m_Animator = GetComponent<Animator>();
 		m_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
 		// Stagger start times to avoid everyone thinking at frame 0
@@ -89,7 +94,12 @@ public class PatrolAgent2D : MonoBehaviour
 			{
 				m_Target = xPoint;
 				m_CurrentState = State.MOVE;
-				m_SpriteRenderer.color = m_TestColors[ 1 ];
+				m_Animator.SetBool( "Walking", true );
+
+				if ( m_Debug )
+				{
+					m_SpriteRenderer.color = m_TestColors[ 1 ];
+				}
 			}
 			else
 			{
@@ -108,14 +118,22 @@ public class PatrolAgent2D : MonoBehaviour
 		m_CurrentState = State.IDLE;
 		float fTime = Random.Range( m_IdleTimeRange.x, m_IdleTimeRange.y );
 		m_IdleUntil = Time.time + fTime;
-		m_SpriteRenderer.color = m_TestColors[ 0 ];
+		m_Animator.SetBool( "Walking", false );
+		if ( m_Debug )
+		{
+			m_SpriteRenderer.color = m_TestColors[ 0 ];
+		}
 	}
 
 	void EnterLeave()
 	{
 		m_CurrentState = State.LEAVE;
 		m_Target = m_DoorToLeaveFrom;
-		m_SpriteRenderer.color = m_TestColors[ 2 ];
+		m_Animator.SetBool( "Walking", true );
+		if ( m_Debug )
+		{
+			m_SpriteRenderer.color = m_TestColors[ 2 ];
+		}
 	}
 
 	bool TryPickRandomPoint( out Vector2 xPoint )
