@@ -1,7 +1,8 @@
 using UnityEngine;
 
-using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour {
@@ -10,6 +11,8 @@ public class UIManager : MonoBehaviour {
 
     // Dictionary to store references to each panel
     private Dictionary<string, UiPanel> panels;
+
+    public UnityAction UiInitComplete;
 
     private void Awake() {
         // Ensure singleton instance
@@ -20,9 +23,14 @@ public class UIManager : MonoBehaviour {
         else {
             Destroy(gameObject);  // Ensure only one UIManager exists
         }
+    } 
+    private void Start()
+    {
+        var children = GetComponentsInChildren<UiPanel>().ToList();
+        children.ForEach(c =>RegisterPanel(c.PanelName, c));
+        UiInitComplete?.Invoke();
     }
 
-    
     // Register a panel with a unique name
     public void RegisterPanel(string panelName, UiPanel panel) {
         if (!panels.ContainsKey(panelName)) {
@@ -61,6 +69,8 @@ public class UIManager : MonoBehaviour {
     }
     public void MissionButton(InputAction.CallbackContext context)
     {
+        //  Button to open the mission menu, which pauses the game and
+        //  Identifies a new assassin (target)
         if (!context.started) return;
         if (panels.ContainsKey("MissionPanel"))
         {

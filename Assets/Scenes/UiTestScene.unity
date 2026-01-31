@@ -402,8 +402,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 424969934}
+  - component: {fileID: 424969935}
   m_Layer: 0
-  m_Name: UI
+  m_Name: GameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -423,9 +424,22 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1890473067}
-  - {fileID: 918664612}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &424969935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424969933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8d909b17d44b2ab8f261afddf109ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.GameController
+  assassinTimerMin: 60
+  assassinTimerMax: 45
 --- !u!1 &621229399
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301405a1b692cc24e973c284e71a130c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  m_MinMaxYPositions: {x: 0, y: 0}
+  m_MinMaxScales: {x: 0, y: 0}
+  m_ParentTransform: {fileID: 0}
 --- !u!1 &963624045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,7 +1282,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 918664612}
   m_Father: {fileID: 424969934}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1890473068
@@ -1377,7 +1395,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 424969934}
+    m_TransformParent: {fileID: 1890473067}
     m_Modifications:
     - target: {fileID: 2495665034891031674, guid: 884c4566fa12b794d9b9164879b730c8, type: 3}
       propertyPath: m_Name

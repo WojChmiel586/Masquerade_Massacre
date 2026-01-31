@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 public class UiPanel : MonoBehaviour
 {
     [SerializeField] protected string panelName;
+    public string PanelName { get { return panelName; } }
     protected VisualElement uiObject;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
