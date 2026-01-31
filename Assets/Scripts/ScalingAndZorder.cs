@@ -35,7 +35,7 @@ public class ScalingAndZorder : MonoBehaviour
 
 		transform.localScale = Vector3.one * scaledB;
 
-		int fZOrder = ( int ) ( Mathf.Lerp( 1, 10000, t ) );
+		int fZOrder = ( int ) ( Mathf.Lerp( 1, 1000, t ) );
 		for ( int i = 0; i < m_Sprites.Length; i++ )
 		{
 			m_Sprites[ i ].sortingOrder = fZOrder + i;
