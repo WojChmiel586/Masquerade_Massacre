@@ -257,6 +257,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &213718733 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5092102827620636543, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
+  m_PrefabInstance: {fileID: 1674624365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069f281daf2cc6e4b9d64786a61dc3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
 --- !u!1 &367929727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1173,46 @@ PrefabInstance:
     - target: {fileID: 5975328641204388736, guid: 939e0fac5235726498beab463845011c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionId
+      value: 51229bff-c342-4da3-9fdd-1244b3702429
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionName
+      value: 'Player/OpenPhone[/Keyboard/tab]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 213718733}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MissionButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207843332420684891, guid: 939e0fac5235726498beab463845011c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9036197837789704939, guid: 939e0fac5235726498beab463845011c, type: 3}
       propertyPath: m_Name

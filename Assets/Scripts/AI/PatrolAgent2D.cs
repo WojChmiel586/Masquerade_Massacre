@@ -29,6 +29,7 @@ public class PatrolAgent2D : MonoBehaviour
 	public State m_CurrentState { get; private set; } = State.IDLE;
 
 	public bool m_FlagForDeletion = false;
+	public bool m_ForceDelete = false;
 
 	Rigidbody2D m_RigidBody;
 	Vector2 m_Target;
@@ -74,6 +75,8 @@ public class PatrolAgent2D : MonoBehaviour
 	{
 		if ( m_CurrentState == State.IDLE )
 		{
+			if ( m_FlagForDeletion ) return;
+
 			// Still idling? do nothing.
 			if ( fCurrentTime < m_IdleUntil ) return;
 

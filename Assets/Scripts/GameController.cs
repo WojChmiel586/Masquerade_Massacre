@@ -12,8 +12,8 @@ namespace DefaultNamespace
         public static GameController Instance;
         
         //  Round timer is the overall game length.
-        private float roundTimerLimit;
-        public float RoundTimerLimit => roundTimerLimit;
+        [SerializeField] private float roundTimeLimit;
+        public float RoundTimerLimit => roundTimeLimit;
         private float roundTimer;
         public float RoundTimer => roundTimer;
         
@@ -37,7 +37,7 @@ namespace DefaultNamespace
             set { gameState.SetState(value); }
         }
         public bool IsInitComplete => CurrentGameState is not GameState.Initialising;
-        //  Game state transition events
+        private bool deferGameStart = false;
         private SimpleStateMachine<TargetState> targetState;
         public TargetState CurrentTargetState
         {
@@ -47,6 +47,9 @@ namespace DefaultNamespace
 
         public bool IsGamePaused => CurrentGameState is GameState.Paused;
         
+        //Debug
+        [SerializeField] private bool setLose = false;
+        [SerializeField] private bool setWin = false;
         private void Awake() {
             // Ensure singleton instance
             if (Instance == null) {
@@ -55,25 +58,44 @@ namespace DefaultNamespace
             else {
                 Destroy(gameObject);  // Ensure only one UIManager exists
             }
-
+            gameState = new(GameState.Initialising);
         }
 
         private void Start()
         {
             //  Initialise new state machines for game and assassin (target)
-            gameState = new(GameState.Initialising);
             gameState.StateChangeEvent.AddListener(OnGameStateChange);
             targetState = new(TargetState.INACTIVE);
             targetState.StateChangeEvent.AddListener(OnTargetStateChange);
             CurrentTargetState = TargetState.INACTIVE;
-            roundTimer = 0;
+            roundTimer = roundTimeLimit;
             Debug.Log("Started. Current game state is  " + CurrentGameState.ToString());
+            if (UIManager.Instance.initComplete) gameState.SetState(GameState.Menu);
+            else deferGameStart = true;
         }
 
         private void Update()
         {
+            if (deferGameStart)
+            {
+                gameState.SetState(GameState.Menu);
+                deferGameStart = false;
+            }
             CheckWinState();
             CheckLoseState();
+            
+            //  Just for debugging win and lose
+            if (setWin)
+            {
+                gameState.SetState(GameState.Win);
+                setWin = false;
+            }
+
+            if (setLose)
+            {
+                gameState.SetState(GameState.Lose);
+                setLose = false;
+            }
         }
 
         private void CheckWinState()
@@ -103,8 +125,7 @@ namespace DefaultNamespace
         private void FindNewTarget()
         {
             //  Find a new assassin target and set a new assassin timer
-            roundTimerLimit = Random.Range(assassinTimerMin, assassinTimerMax);
-            roundTimer = roundTimerLimit;
+            assassinTimer = Random.Range(assassinTimerMin, assassinTimerMax);
             Debug.Log("Assigning new target.");
         }
 
@@ -115,8 +136,16 @@ namespace DefaultNamespace
             switch (newState)
             {
                 case GameState.Playing:
+                    if (oldState is GameState.Menu)
+                    {
+                        roundTimer = roundTimeLimit;
+                        assassinTimer = 99f;
+                        //FindNewTarget();
+                    }
+                    Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Paused:
+                    Cursor.lockState = CursorLockMode.None;
                     if (oldState is GameState.Playing or GameState.Initialising)
                     {
                         if (CurrentTargetState is TargetState.INACTIVE or TargetState.KIA)
@@ -124,10 +153,19 @@ namespace DefaultNamespace
                             FindNewTarget();
                         }
                     }
+
                     break;
                 case GameState.Lose:
+                    Cursor.lockState = CursorLockMode.None;
+                    UIManager.Instance.ShowPanel("LosePanel");
                     break;
                 case GameState.Win:
+                    Cursor.lockState = CursorLockMode.None;
+                    UIManager.Instance.ShowPanel("WinPanel");
+                    break;
+                case GameState.Menu:
+                    Cursor.lockState = CursorLockMode.None;
+                    UIManager.Instance.ShowPanel("MenuPanel");
                     break;
                 default:
                     break;

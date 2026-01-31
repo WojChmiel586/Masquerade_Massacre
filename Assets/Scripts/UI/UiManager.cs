@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour {
     // Dictionary to store references to each panel
     private Dictionary<string, UiPanel> panels;
 
-    public UnityAction UiInitComplete;
+    public bool initComplete = false;
 
     private void Awake() {
         // Ensure singleton instance
@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour {
     {
         var children = GetComponentsInChildren<UiPanel>().ToList();
         children.ForEach(c =>RegisterPanel(c.PanelName, c));
-        UiInitComplete?.Invoke();
+        initComplete = true;
     }
 
     // Register a panel with a unique name

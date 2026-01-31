@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7296099922986398854}
   - component: {fileID: 745665351388020410}
-  - component: {fileID: 6075203504104035501}
+  - component: {fileID: 6680215155995528638}
   m_Layer: 0
   m_Name: LosePanel
   m_TagString: Untagged
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
---- !u!114 &6075203504104035501
+--- !u!114 &6680215155995528638
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2495665034891031674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7593cd63c7e5457a8b4fa58c482ce82d, type: 3}
+  m_Script: {fileID: 11500000, guid: 914cda9cb22b4a2db95f43d3da743120, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI.MissionPanel
-  panelName: MissionPanel
+  m_EditorClassIdentifier: Assembly-CSharp::UI.GameOverPanel
+  panelName: LosePanel

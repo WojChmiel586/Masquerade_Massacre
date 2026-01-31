@@ -8,7 +8,7 @@ public class UiPanel : MonoBehaviour
     public string PanelName { get { return panelName; } }
     protected VisualElement uiObject;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Awake()
+    protected virtual void OnEnable()
     {
         uiObject = GetComponent<UIDocument>().rootVisualElement;
     }
@@ -27,20 +27,20 @@ public class UiPanel : MonoBehaviour
 
     public void ToggleUi()
     {
-        if (gameObject.activeSelf) 
+        if (uiObject.visible) 
             HidePanel();
         else 
             ShowPanel();
     }
     public void ShowPanel()
     {
-        gameObject.SetActive(true);
+        uiObject.visible = true;
         OnShow();
     }
 
     public void HidePanel()
     {
-        gameObject.SetActive(false);
+        uiObject.visible = false;
         OnHide();
     }
 

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7296099922986398854}
   - component: {fileID: 745665351388020410}
-  - component: {fileID: 6174940456609678960}
+  - component: {fileID: 5198522892254634177}
   m_Layer: 0
-  m_Name: WinPanel
+  m_Name: MenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: 156d183bf45a9604b9f7007acb41366a, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 8ac3f8fd5c1ed12428713a1628718517, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 97f455479111535498530c6122cd585a, type: 3}
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
---- !u!114 &6174940456609678960
+--- !u!114 &5198522892254634177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2495665034891031674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 914cda9cb22b4a2db95f43d3da743120, type: 3}
+  m_Script: {fileID: 11500000, guid: edd981398f4b4925a3386926842dad2c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI.GameOverPanel
-  panelName: WinPanel
+  m_EditorClassIdentifier: Assembly-CSharp::UI.MenuPanel
+  panelName: MenuPanel
