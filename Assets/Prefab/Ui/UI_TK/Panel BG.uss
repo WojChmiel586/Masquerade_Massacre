@@ -1,0 +1,15 @@
+:root {
+}
+
+.panel_bg {
+    opacity: 1;
+    background-color: rgb(87, 87, 87);
+    transition-property: opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+
+
+.ProfilePanel {
+}
