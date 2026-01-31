@@ -170,7 +170,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -394,10 +394,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1183694838577136052, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.2400002
-      objectReference: {fileID: 0}
     - target: {fileID: 6877397140903101145, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
       propertyPath: m_ParentTransform
       value: 
@@ -405,14 +401,6 @@ PrefabInstance:
     - target: {fileID: 7682849512834062469, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
       propertyPath: m_Name
       value: Guest
-      objectReference: {fileID: 0}
-    - target: {fileID: 8488026023602826508, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.7400002
-      objectReference: {fileID: 0}
-    - target: {fileID: 8657351587877051443, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.74
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
