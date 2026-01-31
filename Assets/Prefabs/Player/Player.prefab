@@ -482,8 +482,25 @@ MonoBehaviour:
   m_UnscopedCamera: {fileID: 7568514601626752917}
   m_ScopedCamera: {fileID: 6748788016098970633}
   m_input: {fileID: 6207843332420684891}
+  m_ScopeLayer:
+    serializedVersion: 2
+    m_Bits: 64
   m_UnscopedSensitivity: 0.01
   m_ScopedSensitivty: 0.005
+  m_ContactFilter:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!1001 &4975966393277945127
 PrefabInstance:
   m_ObjectHideFlags: 0
