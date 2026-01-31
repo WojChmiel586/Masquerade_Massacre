@@ -53,4 +53,18 @@ public class PatrolManager2D : MonoBehaviour
 	{
 		m_Agents.Add( xAgentObject );
 	}
+
+	public void DeleteSimilarToTargetFeatures( Sprite xMask, Sprite xBody, Color xMaskColor, Color xTrim )
+	{
+		List<PatrolAgent2D> xAgentsToRemove = new();
+		for ( int i = m_Agents.Count - 1; i >= 0; i-- )
+		{
+			if ( m_Agents[ i ].GetComponent<GuestDesignController>().CompareFeatures( xMask, xBody, xMaskColor, xTrim ) )
+			{
+				Destroy( m_Agents[ i ].gameObject );
+				Destroy( m_Agents[ i ] );
+				m_Agents.Remove( m_Agents[ i ] );
+			}
+		}
+	}
 }
