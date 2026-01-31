@@ -1,0 +1,15 @@
+:root {
+    opacity: 1;
+}
+
+
+
+.MissionPanel {
+    background-color: rgb(123, 83, 46);
+    opacity: 1;
+    transition-property: bottom;
+    transition-timing-function: ease-in;
+    transition-duration: 1s;
+    flex-grow: 1;
+    margin-top: 50px;
+}
