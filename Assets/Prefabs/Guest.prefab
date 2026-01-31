@@ -476,3 +476,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301405a1b692cc24e973c284e71a130c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  m_MinMaxYPositions: {x: 1, y: -5.2}
+  m_MinMaxScales: {x: 0.13, y: 0.3}

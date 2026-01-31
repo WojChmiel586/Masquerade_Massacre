@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PatrolAgent2D : MonoBehaviour
 {
-	public enum State { Idle, Move }
+	public enum State { IDLE, MOVE, LEAVE }
 
 	[Header("Patrol Area")]
 	public Collider2D m_PatrolArea;
@@ -13,52 +14,65 @@ public class PatrolAgent2D : MonoBehaviour
 	public float m_MoveSpeed = 2.0f;
 	public Vector2 m_IdleTimeRange = new Vector2( 0.8f, 2.5f) ;
 	public float m_ChanceStandStill = 0.35f; // probability to just idle again instead of moving
+	public float m_ChanceToLeave = 0.05f; // probability to leave the event
+	public float m_ChanceToChooseADifferentActivity = 0.1f; // probability to change target at the event
+	public Vector2 m_DoorToLeaveFrom;
+	[SerializeField] List<Color> m_TestColors = new();
 
 	[Header("Thinking")]
 	public Vector2 m_ThinkIntervalRange = new Vector2( 0.25f, 0.6f ); // decision cadence (not movement)
 	[HideInInspector] public float m_NextThinkTime;
 
-	public State m_CurrentState { get; private set; } = State.Idle;
+	[Header("Debug")]
+	public bool m_Debug;
+
+	public State m_CurrentState { get; private set; } = State.IDLE;
+
+	public bool m_FlagForDeletion = false;
 
 	Rigidbody2D m_RigidBody;
 	Vector2 m_Target;
 	float m_IdleUntil;
+	SpriteRenderer m_SpriteRenderer;
+	Animator m_Animator;
 
-	void Awake()
+	void Start()
 	{
 		m_RigidBody = GetComponent<Rigidbody2D>();
+		m_Animator = GetComponent<Animator>();
+		m_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
 		// Stagger start times to avoid everyone thinking at frame 0
 		m_NextThinkTime = Time.time + Random.Range( 0f, m_ThinkIntervalRange.y );
 		EnterIdle();
-
-		if ( m_PatrolArea != null && TryPickRandomPoint( out var xPoint ) )
-		{
-			m_RigidBody.position = xPoint;
-		}
 	}
 
 	void FixedUpdate()
 	{
-		if ( m_CurrentState != State.Move ) return;
+		if ( m_CurrentState == State.IDLE ) return;
 
 		Vector2 xPos = m_RigidBody.position;
 		Vector2 xDir = ( m_Target - xPos );
 		float fDist = xDir.magnitude;
 
-		if (fDist < 0.05f)
+		if ( fDist < 0.05f )
 		{
+			if( m_CurrentState == State.LEAVE ) 
+			{
+				m_FlagForDeletion = true;
+			}
 			EnterIdle();
 			return;
 		}
 
-		Vector2 xStep = xDir * m_MoveSpeed * Time.fixedDeltaTime;
+		Vector2 xStep = xDir / Mathf.Max( fDist, 0.0001f ) * m_MoveSpeed * Time.fixedDeltaTime;
 		m_RigidBody.MovePosition( xPos + xStep );
 	}
 
 	// Called by the manager when it's time to "think"
 	public void Think( float fCurrentTime )
 	{
-		if ( m_CurrentState == State.Idle )
+		if ( m_CurrentState == State.IDLE )
 		{
 			// Still idling? do nothing.
 			if ( fCurrentTime < m_IdleUntil ) return;
@@ -70,10 +84,22 @@ public class PatrolAgent2D : MonoBehaviour
 				return;
 			}
 
+			if ( Random.value < m_ChanceToLeave )
+			{
+				EnterLeave();
+				return;
+			}
+
 			if ( TryPickRandomPoint( out var xPoint ) )
 			{
 				m_Target = xPoint;
-				m_CurrentState = State.Move;
+				m_CurrentState = State.MOVE;
+				m_Animator.SetBool( "Walking", true );
+
+				if ( m_Debug )
+				{
+					m_SpriteRenderer.color = m_TestColors[ 1 ];
+				}
 			}
 			else
 			{
@@ -81,7 +107,7 @@ public class PatrolAgent2D : MonoBehaviour
 				EnterIdle();
 			}
 		}
-		else if ( m_CurrentState == State.Move )
+		else if ( m_CurrentState == State.MOVE )
 		{
 			// Functionality for if they need to do something when thinking while moving
 		}
@@ -89,9 +115,25 @@ public class PatrolAgent2D : MonoBehaviour
 
 	void EnterIdle()
 	{
-		m_CurrentState = State.Idle;
+		m_CurrentState = State.IDLE;
 		float fTime = Random.Range( m_IdleTimeRange.x, m_IdleTimeRange.y );
 		m_IdleUntil = Time.time + fTime;
+		m_Animator.SetBool( "Walking", false );
+		if ( m_Debug )
+		{
+			m_SpriteRenderer.color = m_TestColors[ 0 ];
+		}
+	}
+
+	void EnterLeave()
+	{
+		m_CurrentState = State.LEAVE;
+		m_Target = m_DoorToLeaveFrom;
+		m_Animator.SetBool( "Walking", true );
+		if ( m_Debug )
+		{
+			m_SpriteRenderer.color = m_TestColors[ 2 ];
+		}
 	}
 
 	bool TryPickRandomPoint( out Vector2 xPoint )
@@ -126,5 +168,12 @@ public class PatrolAgent2D : MonoBehaviour
 	public void ScheduleNextThink( float fCurrentTime )
 	{
 		m_NextThinkTime = fCurrentTime + Random.Range( m_ThinkIntervalRange.x, m_ThinkIntervalRange.y );
+	}
+
+	public void DoorDespawn( Vector2 xDespawnLocation )
+	{
+		m_PatrolArea = null;
+		m_Target = xDespawnLocation;
+		m_CurrentState = State.LEAVE;
 	}
 }
