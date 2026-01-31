@@ -12,8 +12,8 @@ namespace DefaultNamespace
         public static GameController Instance;
         
         //  Round timer is the overall game length.
-        private float roundTimerLimit;
-        public float RoundTimerLimit => roundTimerLimit;
+        [SerializeField] private float roundTimeLimit;
+        public float RoundTimerLimit => roundTimeLimit;
         private float roundTimer;
         public float RoundTimer => roundTimer;
         
@@ -66,7 +66,7 @@ namespace DefaultNamespace
             targetState = new(TargetState.INACTIVE);
             targetState.StateChangeEvent.AddListener(OnTargetStateChange);
             CurrentTargetState = TargetState.INACTIVE;
-            roundTimer = 0;
+            roundTimer = roundTimeLimit;
             Debug.Log("Started. Current game state is  " + CurrentGameState.ToString());
         }
 
@@ -103,8 +103,8 @@ namespace DefaultNamespace
         private void FindNewTarget()
         {
             //  Find a new assassin target and set a new assassin timer
-            roundTimerLimit = Random.Range(assassinTimerMin, assassinTimerMax);
-            roundTimer = roundTimerLimit;
+            roundTimeLimit = Random.Range(assassinTimerMin, assassinTimerMax);
+            roundTimer = roundTimeLimit;
             Debug.Log("Assigning new target.");
         }
 
