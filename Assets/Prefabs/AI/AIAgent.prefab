@@ -143,8 +143,16 @@ MonoBehaviour:
   m_MoveSpeed: 2
   m_IdleTimeRange: {x: 0.8, y: 2.5}
   m_ChanceStandStill: 0.35
+  m_ChanceToLeave: 0.05
+  m_ChanceToChooseADifferentActivity: 0.1
+  m_DoorToLeaveFrom: {x: 0, y: 0}
+  m_TestColors:
+  - {r: 0.25715178, g: 0.9811321, b: 0, a: 1}
+  - {r: 0, g: 0.77571654, b: 1, a: 1}
+  - {r: 0.98742133, g: 0, b: 0, a: 1}
   m_ThinkIntervalRange: {x: 0.25, y: 0.6}
   m_NextThinkTime: 25.9461
+  m_FlagForDeletion: 0
 --- !u!50 &3103963919152610413
 Rigidbody2D:
   serializedVersion: 5

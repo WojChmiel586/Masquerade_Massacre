@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PatrolManager2D : MonoBehaviour
 {
 	public List<PatrolAgent2D> m_Agents = new();
-	public int m_MaxAgentsToThinkPerFrame = 12; // budget cap (prevents spikes)
+	public int m_MaxAgentsToThinkPerFrame = 50; // budget cap (prevents spikes)
 
 	int m_Cursor = 0;
 
@@ -15,14 +17,22 @@ public class PatrolManager2D : MonoBehaviour
 		int iProcessed = 0;
 		int iCount = m_Agents.Count;
 		if ( iCount == 0 ) return;
+		List<PatrolAgent2D> xAgentsToRemove = new();
 
 		// Round-robin so we don't scan the list from 0 every frame
 		while ( iProcessed < m_MaxAgentsToThinkPerFrame )
 		{
-			var xAgent = m_Agents[ m_Cursor ];
 			m_Cursor = ( m_Cursor + 1 ) % iCount;
+			var xAgent = m_Agents[ m_Cursor ];
 
-			if ( xAgent && fCurrentTime >= xAgent.m_NextThinkTime )
+			if ( xAgent.m_FlagForDeletion == true )
+			{
+				m_Agents.Remove( xAgent );
+				Destroy( xAgent.gameObject );
+				iCount = m_Agents.Count;
+			}
+
+			else if ( xAgent && fCurrentTime >= xAgent.m_NextThinkTime )
 			{
 				xAgent.Think( fCurrentTime );
 				xAgent.ScheduleNextThink( fCurrentTime );
@@ -30,10 +40,17 @@ public class PatrolManager2D : MonoBehaviour
 
 			iProcessed++;
 		}
+
+		while ( xAgentsToRemove.Count > 0 )
+		{
+ 			m_Agents.Remove( xAgentsToRemove[ xAgentsToRemove.Count - 1 ] );
+			Destroy( xAgentsToRemove[ xAgentsToRemove.Count - 1 ].gameObject );
+			xAgentsToRemove.Remove( xAgentsToRemove[ xAgentsToRemove.Count - 1 ] );
+		}
 	}
 
-	public void AddAgent( GameObject xAgentObject )
+	public void AddAgent( PatrolAgent2D xAgentObject )
 	{
-		m_Agents.Add( xAgentObject.GetComponent<PatrolAgent2D>() );
+		m_Agents.Add( xAgentObject );
 	}
 }
