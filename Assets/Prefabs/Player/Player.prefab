@@ -460,6 +460,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cba69b79-9575-4291-a554-02db6af12353
     m_ActionName: 'Player/Scope[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 51229bff-c342-4da3-9fdd-1244b3702429
+    m_ActionName: 'Player/OpenPhone[/Keyboard/tab]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -479,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   m_ScopeOverlay: {fileID: 2369338031455672199}
   m_Scope: {fileID: 2991149415110862805}
+  m_ScopeSprite: {fileID: 1798299758123277705}
   m_UnscopedCamera: {fileID: 7568514601626752917}
   m_ScopedCamera: {fileID: 6748788016098970633}
   m_input: {fileID: 6207843332420684891}
@@ -509,6 +514,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5975328641204388736}
     m_Modifications:
+    - target: {fileID: 801716909861933587, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 801716909861933587, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 801716909861933587, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445887382601033397, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+      propertyPath: m_Size.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445887382601033397, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+      propertyPath: m_Size.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445887382601033397, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2fb5bcfad122bf240aeaab0dfa96194b, type: 3}
+    - target: {fileID: 2445887382601033397, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5981324275105772890, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -549,6 +582,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6771996603688863918, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+      propertyPath: m_Name
+      value: ScopeSprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 6771996603688863918, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7821799936249426674, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
       propertyPath: m_Name
       value: Reticule
@@ -561,6 +602,11 @@ PrefabInstance:
 --- !u!4 &1589702149867348093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5981324275105772890, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
+  m_PrefabInstance: {fileID: 4975966393277945127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1798299758123277705 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6771996603688863918, guid: 304f00c4870e44340a3720d1b2633df9, type: 3}
   m_PrefabInstance: {fileID: 4975966393277945127}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2991149415110862805 stripped

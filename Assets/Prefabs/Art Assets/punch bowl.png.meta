@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 2fb5bcfad122bf240aeaab0dfa96194b
+guid: 22ebc596cee1377448534a2f36062834
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8703799121822822345
-    second: A8896C20-09BA-4EAF-8C20-80D883BCB670_0
+      213: -8374970361772190919
+    second: punch bowl_0
+  - first:
+      213: -2479925734230445105
+    second: punch bowl_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: A8896C20-09BA-4EAF-8C20-80D883BCB670_0
+      name: punch bowl_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 84
-        width: 831
-        height: 832
+        x: 376
+        y: 495
+        width: 279
+        height: 240
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +144,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9cf2b94cf2b1ac870800000000000000
-      internalID: 8703799121822822345
+      spriteID: 933d42614d026cb80800000000000000
+      internalID: -8374970361772190919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: punch bowl_1
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 475
+        width: 55
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc338d51fa8859dd0800000000000000
+      internalID: -2479925734230445105
       vertices: []
       indices: 
       edges: []
@@ -151,7 +176,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      A8896C20-09BA-4EAF-8C20-80D883BCB670_0: 8703799121822822345
+      punch bowl_0: -8374970361772190919
+      punch bowl_1: -2479925734230445105
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

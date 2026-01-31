@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 2fb5bcfad122bf240aeaab0dfa96194b
+guid: 1712deabb6cd40d43bda65646561764b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8703799121822822345
-    second: A8896C20-09BA-4EAF-8C20-80D883BCB670_0
+      213: -7175326596099302909
+    second: band plain_0
+  - first:
+      213: 3285428125864601606
+    second: band plain_1
+  - first:
+      213: 9155576961253214841
+    second: band plain_2
+  - first:
+      213: -8865908967174063185
+    second: band plain_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +135,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: A8896C20-09BA-4EAF-8C20-80D883BCB670_0
+      name: band plain_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 84
-        width: 831
-        height: 832
+        x: 288
+        y: 405
+        width: 93
+        height: 153
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +150,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9cf2b94cf2b1ac870800000000000000
-      internalID: 8703799121822822345
+      spriteID: 30a96143a7e1c6c90800000000000000
+      internalID: -7175326596099302909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: band plain_1
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 478
+        width: 93
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 608ac39397f289d20800000000000000
+      internalID: 3285428125864601606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: band plain_2
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 353
+        width: 106
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97a8f39ecb42f0f70800000000000000
+      internalID: 9155576961253214841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: band plain_3
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 434
+        width: 93
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fabb3a894c6f5f480800000000000000
+      internalID: -8865908967174063185
       vertices: []
       indices: 
       edges: []
@@ -151,7 +226,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +236,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      A8896C20-09BA-4EAF-8C20-80D883BCB670_0: 8703799121822822345
+      band plain_0: -7175326596099302909
+      band plain_1: 3285428125864601606
+      band plain_2: 9155576961253214841
+      band plain_3: -8865908967174063185
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

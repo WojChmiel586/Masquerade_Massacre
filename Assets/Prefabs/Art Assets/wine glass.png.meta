@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2fb5bcfad122bf240aeaab0dfa96194b
+guid: 11478653213702942beae9c4b184aab8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8703799121822822345
-    second: A8896C20-09BA-4EAF-8C20-80D883BCB670_0
+      213: -5374923451042035215
+    second: wine glass_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: A8896C20-09BA-4EAF-8C20-80D883BCB670_0
+      name: wine glass_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 84
-        width: 831
-        height: 832
+        x: 434
+        y: 382
+        width: 132
+        height: 235
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9cf2b94cf2b1ac870800000000000000
-      internalID: 8703799121822822345
+      spriteID: 1f909bd499f6865b0800000000000000
+      internalID: -5374923451042035215
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      A8896C20-09BA-4EAF-8C20-80D883BCB670_0: 8703799121822822345
+      wine glass_0: -5374923451042035215
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
