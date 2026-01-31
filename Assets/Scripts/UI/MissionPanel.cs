@@ -23,7 +23,7 @@ namespace UI
             base.OnHide();
 
             //  Because UI gets closed immediately after loading, don't change game state yet
-            if (GameController.Instance.IsInitComplete) GameController.Instance.CurrentGameState = GameState.Playing;
+            if (GameController.Instance.CurrentGameState is GameState.Paused) GameController.Instance.CurrentGameState = GameState.Playing;
             if (returnButton != null)
             {
                 Debug.Log("Btw: " + returnButton.name);

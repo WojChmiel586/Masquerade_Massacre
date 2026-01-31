@@ -19,8 +19,8 @@ namespace UI
         public override void OnHide()
         {
             base.OnHide();
-            retryButton.clickable.clicked += OnRetryButtonClicked;  
-            quitButton.clickable.clicked += OnQuitButtonClicked;
+            if (retryButton != null) retryButton.clickable.clicked -= OnRetryButtonClicked;  
+            if (quitButton != null) quitButton.clickable.clicked -= OnQuitButtonClicked;
         }
 
         private void OnRetryButtonClicked()

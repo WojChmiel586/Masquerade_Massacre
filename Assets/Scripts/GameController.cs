@@ -37,7 +37,7 @@ namespace DefaultNamespace
             set { gameState.SetState(value); }
         }
         public bool IsInitComplete => CurrentGameState is not GameState.Initialising;
-        //  Game state transition events
+        private bool deferGameStart = false;
         private SimpleStateMachine<TargetState> targetState;
         public TargetState CurrentTargetState
         {
@@ -47,6 +47,9 @@ namespace DefaultNamespace
 
         public bool IsGamePaused => CurrentGameState is GameState.Paused;
         
+        //Debug
+        [SerializeField] private bool setLose = false;
+        [SerializeField] private bool setWin = false;
         private void Awake() {
             // Ensure singleton instance
             if (Instance == null) {
@@ -55,25 +58,44 @@ namespace DefaultNamespace
             else {
                 Destroy(gameObject);  // Ensure only one UIManager exists
             }
-
+            gameState = new(GameState.Initialising);
         }
 
         private void Start()
         {
             //  Initialise new state machines for game and assassin (target)
-            gameState = new(GameState.Initialising);
             gameState.StateChangeEvent.AddListener(OnGameStateChange);
             targetState = new(TargetState.INACTIVE);
             targetState.StateChangeEvent.AddListener(OnTargetStateChange);
             CurrentTargetState = TargetState.INACTIVE;
             roundTimer = roundTimeLimit;
             Debug.Log("Started. Current game state is  " + CurrentGameState.ToString());
+            if (UIManager.Instance.initComplete) gameState.SetState(GameState.Menu);
+            else deferGameStart = true;
         }
 
         private void Update()
         {
+            if (deferGameStart)
+            {
+                gameState.SetState(GameState.Menu);
+                deferGameStart = false;
+            }
             CheckWinState();
             CheckLoseState();
+            
+            //  Just for debugging win and lose
+            if (setWin)
+            {
+                gameState.SetState(GameState.Win);
+                setWin = false;
+            }
+
+            if (setLose)
+            {
+                gameState.SetState(GameState.Lose);
+                setLose = false;
+            }
         }
 
         private void CheckWinState()
@@ -124,10 +146,16 @@ namespace DefaultNamespace
                             FindNewTarget();
                         }
                     }
+
                     break;
                 case GameState.Lose:
+                    UIManager.Instance.ShowPanel("LosePanel");
                     break;
                 case GameState.Win:
+                    UIManager.Instance.ShowPanel("WinPanel");
+                    break;
+                case GameState.Menu:
+                    UIManager.Instance.ShowPanel("MenuPanel");
                     break;
                 default:
                     break;

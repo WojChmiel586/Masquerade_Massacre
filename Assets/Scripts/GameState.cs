@@ -6,6 +6,7 @@ namespace DefaultNamespace
         Playing = 1,
         Win = 2,
         Lose = 3,
-        Initialising = 4
+        Initialising = 4,
+        Menu = 5
     }
 }
