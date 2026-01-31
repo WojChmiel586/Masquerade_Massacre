@@ -81,6 +81,16 @@ MonoBehaviour:
   - {fileID: 7411579709113585816, guid: 0d2ed0de72e638a4aaad60867c65f531, type: 3}
   - {fileID: 7839750059904897675, guid: cecd8b538f0ee754faac85a965806db1, type: 3}
   - {fileID: -4586595811736584973, guid: 51428cec78577934c9bf7e0dd7f29093, type: 3}
+  m_HandsL:
+  - {fileID: 5576629542773965713, guid: bd210737ff7d3044fa94c6379eb0f9e9, type: 3}
+  - {fileID: 5576629542773965713, guid: bd210737ff7d3044fa94c6379eb0f9e9, type: 3}
+  - {fileID: 5705110457454821009, guid: 07a97ec27e917e74793b1588d05e9ef9, type: 3}
+  - {fileID: 5705110457454821009, guid: 07a97ec27e917e74793b1588d05e9ef9, type: 3}
+  m_HandsR:
+  - {fileID: -225073500391129520, guid: bd210737ff7d3044fa94c6379eb0f9e9, type: 3}
+  - {fileID: -225073500391129520, guid: bd210737ff7d3044fa94c6379eb0f9e9, type: 3}
+  - {fileID: 1013891409282876557, guid: 07a97ec27e917e74793b1588d05e9ef9, type: 3}
+  - {fileID: 1013891409282876557, guid: 07a97ec27e917e74793b1588d05e9ef9, type: 3}
   m_MaskColours:
   - {r: 1, g: 0.4687288, b: 0, a: 1}
   - {r: 0.9622642, g: 0, b: 0, a: 1}

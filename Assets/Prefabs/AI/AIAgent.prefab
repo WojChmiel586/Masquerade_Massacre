@@ -199,7 +199,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   m_Mask: {fileID: 3806746146774242550}
   m_Body: {fileID: 3510372134757370824}
-  m_Hands: {fileID: 0}
+  m_HandL: {fileID: 6993555892028757391}
+  m_HandR: {fileID: 1570730991045570581}
 --- !u!95 &172644519553883530
 Animator:
   serializedVersion: 7
@@ -406,6 +407,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
+--- !u!212 &1570730991045570581 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8185857352925014962, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
+  m_PrefabInstance: {fileID: 7230065654276725671}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &3510372134757370824 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6116172777172897903, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
@@ -414,6 +420,11 @@ SpriteRenderer:
 --- !u!212 &3806746146774242550 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5801231243445686097, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
+  m_PrefabInstance: {fileID: 7230065654276725671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &6993555892028757391 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 385128550088068648, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
   m_PrefabInstance: {fileID: 7230065654276725671}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7400960301693094094 stripped
