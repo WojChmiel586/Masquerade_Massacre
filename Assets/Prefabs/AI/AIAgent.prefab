@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   m_Mask: {fileID: 3806746146774242550}
+  m_Trim: {fileID: 3026661196830625678}
   m_Body: {fileID: 3510372134757370824}
   m_HandL: {fileID: 6993555892028757391}
   m_HandR: {fileID: 1570730991045570581}
@@ -394,10 +395,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1183694838577136052, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.2400002
-      objectReference: {fileID: 0}
     - target: {fileID: 6877397140903101145, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
       propertyPath: m_ParentTransform
       value: 
@@ -405,14 +402,6 @@ PrefabInstance:
     - target: {fileID: 7682849512834062469, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
       propertyPath: m_Name
       value: Guest
-      objectReference: {fileID: 0}
-    - target: {fileID: 8488026023602826508, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.7400002
-      objectReference: {fileID: 0}
-    - target: {fileID: 8657351587877051443, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.74
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -422,6 +411,11 @@ PrefabInstance:
 --- !u!212 &1570730991045570581 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8185857352925014962, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
+  m_PrefabInstance: {fileID: 7230065654276725671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &3026661196830625678 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5644846746848121897, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
   m_PrefabInstance: {fileID: 7230065654276725671}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &3510372134757370824 stripped
