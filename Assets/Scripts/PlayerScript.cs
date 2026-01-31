@@ -78,6 +78,5 @@ public class PlayerScript : MonoBehaviour
         m_Mousepos.x = Mathf.Clamp(m_Mousepos.x, -9.6f, 9.6f);
         m_Mousepos.y = Mathf.Clamp(m_Mousepos.y, -5.4f, 5.4f);
         m_Scope.transform.position = m_Mousepos;
-        //Debug.Log(delta);
     }
 }
