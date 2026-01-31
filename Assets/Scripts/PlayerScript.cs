@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using System.Collections.Generic;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class PlayerScript : MonoBehaviour
     public GameObject m_Scope;
     public CinemachineCamera m_UnscopedCamera;
     public CinemachineCamera m_ScopedCamera;
-    public Camera m_Camera;
     public PlayerInput m_input;
+    public LayerMask m_ScopeLayer;
     InputAction m_Action;
 
     //Camera Scope values
@@ -22,6 +23,8 @@ public class PlayerScript : MonoBehaviour
     public float m_UnscopedSensitivity = 0.05f;
     [Range(0.005f, 0.1f)]
     public float m_ScopedSensitivty = 0.05f;
+    Camera m_MainCam;
+    public ContactFilter2D m_ContactFilter;
 
     Vector3 delta;
 
@@ -30,6 +33,8 @@ public class PlayerScript : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         m_Action = m_input.actions.FindAction("Look");
+        m_MainCam = Camera.main;
+        m_ContactFilter.layerMask = m_ScopeLayer;
 
     }
 
@@ -43,7 +48,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("Zoomed in");
             m_ScopeOverlay.SetActive(true);
             m_scopedIn = true;
 
@@ -51,7 +55,6 @@ public class PlayerScript : MonoBehaviour
 
         if (context.canceled)
         {
-            Debug.Log("Zoom out");
             m_ScopeOverlay.SetActive(false);
             m_scopedIn = false;
         }
@@ -78,6 +81,47 @@ public class PlayerScript : MonoBehaviour
         m_Mousepos.x = Mathf.Clamp(m_Mousepos.x, -9.6f, 9.6f);
         m_Mousepos.y = Mathf.Clamp(m_Mousepos.y, -5.4f, 5.4f);
         m_Scope.transform.position = m_Mousepos;
-        //Debug.Log(delta);
+    }
+
+    public void Fire(InputAction.CallbackContext context)
+    {
+        Collider2D gunTarget = null;
+        if (!m_scopedIn)
+        {
+            return;
+        }
+        if (context.performed)
+        {
+            List<Collider2D> colliders = new List<Collider2D>();
+            int test = Physics2D.OverlapCircle(m_Mousepos, 0.1f, m_ContactFilter, colliders);
+            if (colliders.Count > 0)
+            {
+                foreach (Collider2D collider in colliders)
+                {
+                    if (gunTarget == null)
+                    {
+                        gunTarget = collider;
+                    }
+                    else
+                    {
+                        if (collider.transform.localScale.x > gunTarget.transform.localScale.x)
+                        {
+                            gunTarget = collider;
+                        }
+                    }
+
+                }
+
+                gunTarget.gameObject.SetActive(false);
+                Debug.Log("hitSomething");
+            }
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(m_Mousepos, 0.1f);
     }
 }
