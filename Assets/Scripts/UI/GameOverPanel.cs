@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace UI
@@ -27,7 +28,8 @@ namespace UI
 
         private void OnRetryButtonClicked(ClickEvent evt)
         {
-            HidePanel();
+			SceneManager.LoadScene( "Main Game Scene" );
+			HidePanel();
             //  Restart level
         }
 
