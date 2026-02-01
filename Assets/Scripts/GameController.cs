@@ -129,6 +129,7 @@ namespace DefaultNamespace
         {
             //  Find a new assassin target and set a new assassin timer
             assassinTimer = Random.Range(assassinTimerMin, assassinTimerMax);
+            _targetController.SpawnNewTarget();
             _targetController.FindCurrentTarget();
         }
 
@@ -188,5 +189,10 @@ namespace DefaultNamespace
                     break;
             }
         }
+
+		public void OnTargetKilled()
+		{
+			FindNewTarget();
+		}
     }
 }

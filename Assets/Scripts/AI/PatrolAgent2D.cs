@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -141,7 +142,7 @@ public class PatrolAgent2D : MonoBehaviour
 				m_CurrentState = State.MOVE;
 				m_Animator.SetBool( "Walking", true );
 
-				if ( m_Debug )
+				if ( m_Debug && m_IsTheTarget )
 				{
 					m_SpriteRenderer.color = m_TestColors[ 1 ];
 				}
@@ -165,7 +166,7 @@ public class PatrolAgent2D : MonoBehaviour
 		m_IdleUntil = Time.time + fTime;
 		m_Animator.SetBool( "Walking", false );
 
-		if ( m_Debug )
+		if ( m_Debug && m_IsTheTarget )
 		{
 			m_SpriteRenderer.color = m_TestColors[ 0 ];
 		}
@@ -176,7 +177,7 @@ public class PatrolAgent2D : MonoBehaviour
 		m_CurrentState = State.LEAVE;
 		m_Target = m_DoorToLeaveFrom.transform.position;
 		m_Animator.SetBool( "Walking", true );
-		if ( m_Debug )
+		if ( m_Debug && m_IsTheTarget )
 		{
 			m_SpriteRenderer.color = m_TestColors[ 2 ];
 		}
@@ -225,7 +226,11 @@ public class PatrolAgent2D : MonoBehaviour
 
 	public void Shot()
 	{
-		m_CurrentState = State.DEAD;
-		m_Animator.SetBool( "Dead", true );
+		if (m_CurrentState != State.DEAD )
+		{
+			m_CurrentState = State.DEAD;
+			m_Animator.SetBool( "Dead", true );
+			GameController.Instance.OnTargetKilled();
+		}
 	}
 }

@@ -22,5 +22,10 @@ namespace DefaultNamespace
             guestIdentifiers = spawnManager.GetCurrentTarget();
             return guestIdentifiers;
         }
+
+		public void SpawnNewTarget()
+		{
+			spawnManager.SpawnTarget();
+		}
     }
 }
