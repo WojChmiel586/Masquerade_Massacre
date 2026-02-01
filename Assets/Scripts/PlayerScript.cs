@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     const float CAMERA_UNSCOPED_SIZE = 5.4f;
     const float CAMERA_SCOPED_SIZE = 1.5f;
     bool m_scopedIn = false;
+    bool startedGame = false;
     Vector3 m_Mousepos = Vector3.zero;
     [Range(0.005f, 0.1f)]
     public float m_UnscopedSensitivity = 0.05f;
@@ -44,11 +45,16 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         MouseAim();
+        if (!startedGame) 
+        {
+            m_UnscopedCursor.SetActive(true);
+            startedGame = true;
+        }
     }
 
     public void ZoomIn(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && GameController.Instance.CurrentGameState == GameState.Playing)
         {
             m_scopedIn = true;
         }
@@ -91,6 +97,10 @@ public class PlayerScript : MonoBehaviour
 
         if (context.performed)
         {
+            if (GameController.Instance.CurrentGameState != GameState.Playing)
+            {
+                return;
+            }
             //Clicking on dossier
             if (!m_scopedIn)
             {
@@ -131,11 +141,5 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(m_Mousepos, 0.1f);
     }
 }
