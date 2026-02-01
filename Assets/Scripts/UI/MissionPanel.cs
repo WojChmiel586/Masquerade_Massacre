@@ -28,6 +28,7 @@ namespace UI
             base.OnShow();
            
             GameController.Instance.CurrentGameState = GameState.Paused;
+            AssignTargetData();
         }
         public override void OnHide()
         {
@@ -44,10 +45,32 @@ namespace UI
 
         public void AssignTargetData()
         {
+            var targetData = GameController.Instance.TargetController.GuestData;
+            var activity = GameController.Instance.TargetController.GetIdentifiers().m_iActivity;
             var targetMaskShape = uiObject.Q<Image>("img-targetMask");
-            var Trait_1 = uiObject.Q<Label>("Trait_1");
-            var Trait_2 = uiObject.Q<Label>("Trait_2");
-            var Trait_3 = uiObject.Q<Label>("Trait_3");
+            var trait1 = uiObject.Q<Label>("Trait_1");
+            var activityImage = uiObject.Q<Image>("image-activity");
+            
+            //  Set values
+
+            switch (activity)
+            {
+                case -1:
+                    trait1.text = "Likes: Roaming around";
+                    break;
+                case 0:
+                    trait1.text = "Likes: Snooker";
+                    break;
+                case 1:
+                    trait1.text = "Likes: Punch";
+                    break;
+                case 2:
+                    trait1.text = "Likes: Turkey";
+                    break;
+            }
+            targetMaskShape.image = targetData.MaskSprite.texture;
+            activityImage.image = targetData.ActivitySprite.texture;
+
         }
     }
 }

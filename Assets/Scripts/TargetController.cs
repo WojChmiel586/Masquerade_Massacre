@@ -14,13 +14,18 @@ namespace DefaultNamespace
         private SpawnManager spawnManager;
         private void Start()
         {
-            spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+            spawnManager = GameObject.Find("AIManager").GetComponent<SpawnManager>();
         }
 
         public GuestIdPacket FindCurrentTarget()
         {
             guestIdentifiers = spawnManager.GetCurrentTarget();
             return guestIdentifiers;
+        }
+
+        public GuestIdentifiers GetIdentifiers()
+        {
+            return spawnManager.CurrentTargetIdentifiers;
         }
     }
 }

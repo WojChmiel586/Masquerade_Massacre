@@ -2,6 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
@@ -21,7 +22,7 @@ namespace DefaultNamespace
         [SerializeField] private float assassinTimerMin;
         [SerializeField] private float assassinTimerMax;
 
-        private TargetController _targetController;
+        [FormerlySerializedAs("_targetController")] public TargetController TargetController;
 
         private float assassinTimer;
 
@@ -61,7 +62,7 @@ namespace DefaultNamespace
                 Destroy(gameObject);  // Ensure only one UIManager exists
             }
             gameState = new(GameState.Initialising);
-            _targetController = GetComponentInChildren<TargetController>();
+            TargetController = GetComponentInChildren<TargetController>();
         }
 
         private void Start()
@@ -129,7 +130,7 @@ namespace DefaultNamespace
         {
             //  Find a new assassin target and set a new assassin timer
             assassinTimer = Random.Range(assassinTimerMin, assassinTimerMax);
-            _targetController.FindCurrentTarget();
+            TargetController.FindCurrentTarget();
         }
 
         private void OnGameStateChange(GameState newState, GameState oldState)
