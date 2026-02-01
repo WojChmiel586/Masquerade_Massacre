@@ -141,7 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169d5689272aadf4cbe85e74c91b7d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PatrolAgent2D
-  m_iAssignedZone: 0
+  m_IsTheTarget: 0
+  m_IsVIP: 0
   m_PatrolArea: {fileID: 0}
   m_MinMoveDistance: 0.75
   m_MaxSampleAttempts: 12
@@ -158,10 +159,9 @@ MonoBehaviour:
   - {r: 0.98742133, g: 0, b: 0, a: 1}
   m_ActivityObject: {fileID: 0}
   m_HoldingObjectSpriteRenderer: {fileID: 7119314506426118688}
-  m_IsTheTarget: 0
   m_ThinkIntervalRange: {x: 0.25, y: 0.6}
   m_NextThinkTime: 25.9461
-  m_Debug: 0
+  m_Debug: 1
   m_FlagForDeletion: 0
   m_ForceDelete: 0
   m_TimeToDie: 2

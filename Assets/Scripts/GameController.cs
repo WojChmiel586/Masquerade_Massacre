@@ -144,19 +144,19 @@ namespace DefaultNamespace
                     {
                         roundTimer = roundTimeLimit;
                         assassinTimer = 99f;
-                        //FindNewTarget();
+                        FindNewTarget();
                     }
                     //Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Paused:
                     Cursor.lockState = CursorLockMode.None;
-                    if (oldState is GameState.Playing or GameState.Initialising)
-                    {
-                        if (CurrentTargetState is TargetState.INACTIVE or TargetState.KIA)
-                        {
-                            FindNewTarget();
-                        }
-                    }
+                    //if (oldState is GameState.Playing or GameState.Initialising)
+                    //{
+                    //    if (CurrentTargetState is TargetState.INACTIVE or TargetState.KIA)
+                    //    {
+                    //        FindNewTarget();
+                    //    }
+                    //}
 
                     break;
                 case GameState.Lose:

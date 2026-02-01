@@ -31,11 +31,11 @@ public class GuestIdPacket
 	public GuestIdPacket(GuestTraits trait, Sprite activity, Sprite bodySprite, Sprite maskSprite, Color maskColour, Color maskTrim)
 	{
 		m_trait = GuestTraits.All;
-		this.m_maskSprite = m_maskSprite;
+		this.m_maskSprite = maskSprite;
 		m_activity = activity;
 		this.m_maskColour = maskColour;
 		this.m_bodySprite = bodySprite;
-		this.m_maskTrim = m_maskTrim;
+		this.m_maskTrim = maskTrim;
 	}
 	public GuestIdPacket(GuestTraits mTraitType, Sprite sprite)
 	{
@@ -48,7 +48,7 @@ public class GuestIdPacket
 	{
 		m_trait = mTraitType;
 		if (m_trait == GuestTraits.MaskColor) m_maskColour = traitColour;
-		else if (m_trait == GuestTraits.MaskDesign) m_maskTrim = traitColour;
+		else if (m_trait == GuestTraits.MaskTrim) m_maskTrim = traitColour;
 		else Debug.LogError("Failed to generate Guest Id packet");
 	}
 
@@ -142,11 +142,10 @@ public class SpawnManager : MonoBehaviour
 
 	GuestIdentifiers m_CurrentTargetIdentifiers = new();
 
-	void Awake()
+	void Start()
 	{
 		m_PatrolManager = GetComponent<PatrolManager2D>();
 		m_GameController = GameController.Instance;
-		m_GameController.OnTargetKilled();
 		SpawnVIP();
 	}
 
@@ -251,7 +250,7 @@ public class SpawnManager : MonoBehaviour
 		{
 			case GuestTraits.Activity:
 				guestData = new(GuestTraits.Activity, 
-					m_PatrolActivities[value]);
+					value == -1 ? null : m_PatrolActivities[ value ] );
 				break;
 			case GuestTraits.MaskDesign:
 				guestData = new(GuestTraits.MaskDesign, 

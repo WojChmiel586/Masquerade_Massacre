@@ -12,9 +12,9 @@ namespace DefaultNamespace
         private PatrolAgent2D currentTarget;
 
         private SpawnManager spawnManager;
-        private void Start()
+        private void Awake()
         {
-            spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+            spawnManager = GameObject.Find( "AIManager" ).GetComponent<SpawnManager>();
         }
 
         public GuestIdPacket FindCurrentTarget()

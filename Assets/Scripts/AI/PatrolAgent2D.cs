@@ -124,7 +124,7 @@ public class PatrolAgent2D : MonoBehaviour
 				return;
 			}
 
-			if ( !m_bFirstMove && !( m_IsTheTarget || m_IsVIP ) && Random.value < m_ChanceToLeave )
+			if ( !m_bFirstMove && !m_IsTheTarget && !m_IsVIP && Random.value < m_ChanceToLeave )
 			{
 				EnterLeave();
 				return;

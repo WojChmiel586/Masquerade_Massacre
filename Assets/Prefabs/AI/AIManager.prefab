@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5185918443662424550}
   - component: {fileID: 1050986009719685469}
   - component: {fileID: 1939588533262335436}
-  - component: {fileID: 4567099154814403427}
   m_Layer: 0
   m_Name: AIManager
   m_TagString: Untagged
@@ -66,9 +65,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  m_PatrolActivities:
+  - {fileID: 21300000, guid: f3e90debb2f938f4fa2fec325e71a64f, type: 3}
+  - {fileID: 21300000, guid: 11478653213702942beae9c4b184aab8, type: 3}
+  - {fileID: 21300000, guid: 403eed57672b24f438f4418ec9952b4b, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SpawnAreas:
   - {fileID: 0}
   - {fileID: 0}
+  m_SpawnLocation: {fileID: 0}
   m_AgentPrefab: {fileID: 2259472768862001461, guid: 3fbc4475c9dceb44c8469f7e457f8601, type: 3}
   m_MaxAgents: 50
   m_Masks:
@@ -97,33 +105,5 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0.8160639, a: 1}
   - {r: 0, g: 0.6981132, b: 0.13689534, a: 1}
   - {r: 0.7182925, g: 0, b: 0.72955966, a: 1}
---- !u!114 &4567099154814403427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835054890253413273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_VIPMask: {fileID: 0}
+  m_VIPPatrolZone: {fileID: 0}
