@@ -130,8 +130,8 @@ namespace DefaultNamespace
         {
             //  Find a new assassin target and set a new assassin timer
             assassinTimer = Random.Range(assassinTimerMin, assassinTimerMax);
-            _targetController.SpawnNewTarget();
-            _targetController.FindCurrentTarget();
+            TargetController.SpawnNewTarget();
+            TargetController.FindCurrentTarget();
         }
 
         private void OnGameStateChange(GameState newState, GameState oldState)
@@ -145,6 +145,7 @@ namespace DefaultNamespace
                     {
                         roundTimer = roundTimeLimit;
                         assassinTimer = 99f;
+                        AudioManager.instance.PlayGameMusic();
                         //FindNewTarget();
                     }
                     //Cursor.lockState = CursorLockMode.Locked;
@@ -163,14 +164,17 @@ namespace DefaultNamespace
                 case GameState.Lose:
                     Cursor.lockState = CursorLockMode.None;
                     UIManager.Instance.ShowPanel("LosePanel");
+                    AudioManager.instance.FailSFX();
                     break;
                 case GameState.Win:
                     Cursor.lockState = CursorLockMode.None;
                     UIManager.Instance.ShowPanel("WinPanel");
+                    AudioManager.instance.WinSFX();
                     break;
                 case GameState.Menu:
                     Cursor.lockState = CursorLockMode.None;
                     UIManager.Instance.ShowPanel("MenuPanel");
+                    AudioManager.instance.PlayMenuMusic();
                     break;
                 default:
                     break;

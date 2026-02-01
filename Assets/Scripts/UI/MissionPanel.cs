@@ -29,6 +29,7 @@ namespace UI
            
             GameController.Instance.CurrentGameState = GameState.Paused;
             AssignTargetData();
+            AudioManager.instance.OpenDossierSFX();
         }
         public override void OnHide()
         {

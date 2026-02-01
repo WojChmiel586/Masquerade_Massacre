@@ -50,7 +50,7 @@ public class GuestIdPacket
 	{
 		m_trait = mTraitType;
 		if (m_trait == GuestTraits.MaskColor) m_maskColour = traitColour;
-		else if (m_trait == GuestTraits.MaskDesign) m_maskTrim = traitColour;
+		else if (m_trait == GuestTraits.MaskTrim) m_maskTrim = traitColour;
 		else Debug.LogError("Failed to generate Guest Id packet");
 	}
 
