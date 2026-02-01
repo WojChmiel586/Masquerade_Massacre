@@ -18,7 +18,6 @@ public class UiPanel : MonoBehaviour
     void Start()
     {
         UIManager.Instance.RegisterPanel(panelName, this);
-        HidePanel();
     }
 
     // Update is called once per frame
