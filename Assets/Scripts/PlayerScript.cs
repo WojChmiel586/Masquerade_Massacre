@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject m_ScopeOverlay;
     public GameObject m_Scope;
     public GameObject m_ScopeSprite;
+    public GameObject m_UnscopedCursor;
     public CinemachineCamera m_UnscopedCamera;
     public CinemachineCamera m_ScopedCamera;
     public PlayerInput m_input;
@@ -60,6 +61,7 @@ public class PlayerScript : MonoBehaviour
         m_UnscopedCamera.gameObject.SetActive(!m_scopedIn);
         m_ScopedCamera.gameObject.SetActive(m_scopedIn);
         m_ScopeSprite.SetActive(m_scopedIn);
+        m_UnscopedCursor.SetActive(!m_scopedIn);
 
     }
 
