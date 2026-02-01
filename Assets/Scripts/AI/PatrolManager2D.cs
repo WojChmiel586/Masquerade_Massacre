@@ -58,7 +58,7 @@ public class PatrolManager2D : MonoBehaviour
 	{
 		for ( int i = m_Agents.Count - 1; i >= 0; i-- )
 		{
-			if ( xGuestIdentifiers == m_Agents[ i ].m_GuestIdentifiers )
+			if ( !m_Agents[ i ].m_IsTheTarget && xGuestIdentifiers == m_Agents[ i ].m_GuestIdentifiers )
 			{
 				Destroy( m_Agents[ i ].gameObject );
 				Destroy( m_Agents[ i ] );

@@ -29,6 +29,7 @@ namespace UI
            
             GameController.Instance.CurrentGameState = GameState.Paused;
             AssignTargetData();
+            AudioManager.instance.OpenDossierSFX();
         }
         public override void OnHide()
         {
@@ -57,15 +58,19 @@ namespace UI
             {
                 case -1:
                     trait1.text = "Likes: Roaming around";
+                    activityImage.visible = false;
                     break;
                 case 0:
                     trait1.text = "Likes: Snooker";
+                    activityImage.visible = true;
                     break;
                 case 1:
                     trait1.text = "Likes: Punch";
+                    activityImage.visible = true;
                     break;
                 case 2:
                     trait1.text = "Likes: Turkey";
+                    activityImage.visible = true;
                     break;
             }
             targetMaskShape.image = targetData.MaskSprite.texture;

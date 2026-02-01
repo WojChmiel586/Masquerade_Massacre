@@ -22,7 +22,9 @@ namespace DefaultNamespace
         [SerializeField] private float assassinTimerMin;
         [SerializeField] private float assassinTimerMax;
 
-        [FormerlySerializedAs("_targetController")] public TargetController TargetController;
+		public bool m_VIPDead = false;
+
+        public TargetController TargetController;
 
         private float assassinTimer;
 
@@ -84,6 +86,7 @@ namespace DefaultNamespace
             {
                 gameState.SetState(GameState.Menu);
                 deferGameStart = false;
+				m_VIPDead = false;
             }
             CheckWinState();
             CheckLoseState();
@@ -120,7 +123,8 @@ namespace DefaultNamespace
             var gameIsRunning = CurrentGameState is GameState.Playing;
             var timerHasExpired = assassinTimer <= 0;
             var roundTimerHasExpired = roundTimer <= 0;
-            if (gameIsRunning && timerHasExpired && !roundTimerHasExpired)
+            if ( ( gameIsRunning && timerHasExpired && !roundTimerHasExpired ) 
+				|| m_VIPDead )
             {
                 gameState.SetState(GameState.Lose);
             }
@@ -130,8 +134,8 @@ namespace DefaultNamespace
         {
             //  Find a new assassin target and set a new assassin timer
             assassinTimer = Random.Range(assassinTimerMin, assassinTimerMax);
-            _targetController.SpawnNewTarget();
-            _targetController.FindCurrentTarget();
+			TargetController.SpawnNewTarget();
+			TargetController.FindCurrentTarget();
         }
 
         private void OnGameStateChange(GameState newState, GameState oldState)
@@ -145,32 +149,36 @@ namespace DefaultNamespace
                     {
                         roundTimer = roundTimeLimit;
                         assassinTimer = 99f;
-                        //FindNewTarget();
+                        AudioManager.instance.PlayGameMusic();
+                        FindNewTarget();
                     }
                     //Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Paused:
                     Cursor.lockState = CursorLockMode.None;
-                    if (oldState is GameState.Playing or GameState.Initialising)
-                    {
-                        if (CurrentTargetState is TargetState.INACTIVE or TargetState.KIA)
-                        {
-                            FindNewTarget();
-                        }
-                    }
+                    //if (oldState is GameState.Playing or GameState.Initialising)
+                    //{
+                    //    if (CurrentTargetState is TargetState.INACTIVE or TargetState.KIA)
+                    //    {
+                    //        FindNewTarget();
+                    //    }
+                    //}
 
                     break;
                 case GameState.Lose:
                     Cursor.lockState = CursorLockMode.None;
                     UIManager.Instance.ShowPanel("LosePanel");
+                    AudioManager.instance.FailSFX();
                     break;
                 case GameState.Win:
                     Cursor.lockState = CursorLockMode.None;
                     UIManager.Instance.ShowPanel("WinPanel");
+                    AudioManager.instance.WinSFX();
                     break;
                 case GameState.Menu:
                     Cursor.lockState = CursorLockMode.None;
                     UIManager.Instance.ShowPanel("MenuPanel");
+                    AudioManager.instance.PlayMenuMusic();
                     break;
                 default:
                     break;

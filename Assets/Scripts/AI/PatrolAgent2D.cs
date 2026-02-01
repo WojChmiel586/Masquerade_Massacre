@@ -124,7 +124,7 @@ public class PatrolAgent2D : MonoBehaviour
 				return;
 			}
 
-			if ( !m_bFirstMove && !( m_IsTheTarget || m_IsVIP ) && Random.value < m_ChanceToLeave )
+			if ( !m_bFirstMove && !m_IsTheTarget && !m_IsVIP && Random.value < m_ChanceToLeave )
 			{
 				EnterLeave();
 				return;
@@ -230,7 +230,14 @@ public class PatrolAgent2D : MonoBehaviour
 		{
 			m_CurrentState = State.DEAD;
 			m_Animator.SetBool( "Dead", true );
-			GameController.Instance.OnTargetKilled();
+			if( m_IsTheTarget)
+			{
+				GameController.Instance.OnTargetKilled();
+			}
+			if( m_IsVIP )
+			{
+				GameController.Instance.m_VIPDead = true;
+			}
 		}
 	}
 }
