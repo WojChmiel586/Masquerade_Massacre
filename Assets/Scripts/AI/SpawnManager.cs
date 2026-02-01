@@ -6,7 +6,65 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using static UnityEngine.LowLevelPhysics2D.PhysicsBody;
+using Color = UnityEngine.Color;
 
+public enum GuestTraits
+{
+	All = 0,
+	Activity = 1,
+	MaskDesign = 2,
+	BodyType = 3,
+	MaskColor = 4,
+	MaskTrim = 5
+}
+
+public class GuestIdPacket
+{
+	private GuestTraits m_trait;
+	private Sprite m_maskSprite;
+	private Sprite m_bodySprite;
+	private Sprite m_activity;
+	private Color m_maskColour;
+	private Color m_maskTrim;
+
+	public GuestIdPacket(GuestTraits trait, Sprite activity, Sprite bodySprite, Sprite maskSprite, Color maskColour, Color maskTrim)
+	{
+		m_trait = GuestTraits.All;
+		this.m_maskSprite = m_maskSprite;
+		m_activity = activity;
+		this.m_maskColour = maskColour;
+		this.m_bodySprite = bodySprite;
+		this.m_maskTrim = m_maskTrim;
+	}
+	public GuestIdPacket(GuestTraits mTraitType, Sprite sprite)
+	{
+		m_trait = mTraitType;
+		if (m_trait is GuestTraits.BodyType) m_bodySprite = sprite;
+		else if (m_trait is GuestTraits.MaskDesign) m_maskSprite = sprite;
+	}
+
+	public GuestIdPacket(GuestTraits mTraitType, Color traitColour)
+	{
+		m_trait = mTraitType;
+		if (m_trait == GuestTraits.MaskColor) m_maskColour = traitColour;
+		else if (m_trait == GuestTraits.MaskDesign) m_maskTrim = traitColour;
+		else Debug.LogError("Failed to generate Guest Id packet");
+	}
+
+	public Sprite MaskSprite => m_maskSprite;
+
+	public Color MaskColour => m_maskColour;
+
+	public Color MaskTrim => m_maskTrim;
+	public Sprite BodySprite => m_bodySprite;
+	public Sprite ActivitySprite => m_activity;
+
+
+	public GuestTraits GetTrait()
+	{
+		return m_trait;
+	}
+}
 public class GuestIdentifiers : IEquatable<GuestIdentifiers>
 {
 	public int m_iActivity;
@@ -178,5 +236,49 @@ public class SpawnManager : MonoBehaviour
 	{
 		m_PatrolManager.DeleteSimilarToTargetFeatures( xGuestIdentifiers );
 		m_CurrentTargetIdentifiers = xGuestIdentifiers;
+	}
+
+	public GuestIdPacket GetBodyFromIdentifier(GuestTraits trait, int value)
+	{
+		GuestIdPacket guestData;
+		switch (trait)
+		{
+			case GuestTraits.Activity:
+				guestData = new(GuestTraits.Activity, 
+					m_PatrolActivities[value]);
+				break;
+			case GuestTraits.MaskDesign:
+				guestData = new(GuestTraits.MaskDesign, 
+					m_Masks[value]);
+				break;
+			case GuestTraits.BodyType:
+				guestData = new(GuestTraits.BodyType, 
+					m_Bodies[value]);
+				break;
+			case GuestTraits.MaskColor:
+				guestData = new(GuestTraits.MaskColor, 
+					m_MaskColours[value]);
+				break;
+			case GuestTraits.MaskTrim:
+				guestData = new(GuestTraits.MaskTrim, 
+					m_MaskColours[value]);
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(trait), trait, null);
+		}
+
+		return guestData;
+	}
+
+	public GuestIdPacket GetCurrentTarget()
+	{
+		var activity = GetBodyFromIdentifier(GuestTraits.Activity, m_CurrentTargetIdentifiers.m_iActivity);
+		var maskDesign = GetBodyFromIdentifier(GuestTraits.MaskDesign, m_CurrentTargetIdentifiers.m_iMaskDesign);
+		var maskTrim = GetBodyFromIdentifier(GuestTraits.MaskTrim,  m_CurrentTargetIdentifiers.m_iTrimColor);
+		var maskColour = GetBodyFromIdentifier(GuestTraits.MaskColor, m_CurrentTargetIdentifiers.m_iMaskColor);
+		var bodyType = GetBodyFromIdentifier(GuestTraits.BodyType, m_CurrentTargetIdentifiers.m_iBodyType);
+
+		return new GuestIdPacket(GuestTraits.All, activity.ActivitySprite, bodyType.BodySprite, maskDesign.MaskSprite,
+			maskColour.MaskColour, maskTrim.MaskTrim);
 	}
 }
