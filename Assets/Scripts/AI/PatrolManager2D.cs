@@ -22,6 +22,8 @@ public class PatrolManager2D : MonoBehaviour
 		// Round-robin so we don't scan the list from 0 every frame
 		while ( iProcessed < m_MaxAgentsToThinkPerFrame )
 		{
+			if ( m_Agents.Count == 0 )
+				return;
 			m_Cursor = ( m_Cursor + 1 ) % iCount;
 			var xAgent = m_Agents[ m_Cursor ];
 
@@ -63,6 +65,17 @@ public class PatrolManager2D : MonoBehaviour
 				Destroy( m_Agents[ i ].gameObject );
 				Destroy( m_Agents[ i ] );
 				m_Agents.Remove( m_Agents[ i ] );
+			}
+		}
+	}
+
+	public void ClearTheRoom()
+	{
+		for ( int i = m_Agents.Count - 1; i >= 0; i-- )
+		{
+			if ( !m_Agents[ i ].m_IsVIP  )
+			{
+				m_Agents[ i ].DoorDespawn();
 			}
 		}
 	}

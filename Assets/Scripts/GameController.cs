@@ -123,11 +123,12 @@ namespace DefaultNamespace
             var gameIsRunning = CurrentGameState is GameState.Playing;
             var timerHasExpired = assassinTimer <= 0;
             var roundTimerHasExpired = roundTimer <= 0;
-            if ( ( gameIsRunning && timerHasExpired && !roundTimerHasExpired ) 
-				|| m_VIPDead )
+            if ( gameIsRunning && ( ( timerHasExpired && !roundTimerHasExpired )
+				|| m_VIPDead ) )
             {
                 gameState.SetState(GameState.Lose);
-            }
+				TargetController.ClearOnEnd();
+			}
         }
         
         private void FindNewTarget()

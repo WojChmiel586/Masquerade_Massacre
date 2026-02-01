@@ -28,6 +28,11 @@ namespace DefaultNamespace
 			spawnManager.SpawnTarget();
 		}
 
+		public void ClearOnEnd()
+		{
+			spawnManager.ClearGame();
+		}
+
         public GuestIdentifiers GetIdentifiers()
         {
             return spawnManager.CurrentTargetIdentifiers;

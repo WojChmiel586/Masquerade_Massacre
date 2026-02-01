@@ -154,6 +154,7 @@ public class SpawnManager : MonoBehaviour
 
 	void LateUpdate()
 	{
+		m_MaxAgents = m_GameController.CurrentGameState == GameState.Playing ? 50 : 0;
 		if ( m_GameController.CurrentGameState == GameState.Playing && m_PatrolManager.m_Agents.Count < m_MaxAgents )
 		{
 			InstantSpawn();
@@ -288,5 +289,10 @@ public class SpawnManager : MonoBehaviour
 
 		return new GuestIdPacket(GuestTraits.All, activity.ActivitySprite, bodyType.BodySprite, maskDesign.MaskSprite,
 			maskColour.MaskColour, maskTrim.MaskTrim);
+	}
+
+	public void ClearGame()
+	{
+		m_PatrolManager.ClearTheRoom();
 	}
 }
