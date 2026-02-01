@@ -13,7 +13,7 @@ namespace UI
         {
             base.OnEnable();
             startButton = uiObject.Q<Button>("Button_PlayAgain");
-            startButton.RegisterCallback<ClickEvent>(OnRetryButtonClicked); 
+            startButton.RegisterCallback<ClickEvent>(OnRetryButtonClicked);
         }
 
         private void OnDisable()
@@ -25,7 +25,7 @@ namespace UI
         public override void OnShow()
         {
             base.OnShow();
-           
+
         }
 
         public override void OnHide()
