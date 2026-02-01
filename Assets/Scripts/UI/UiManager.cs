@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour {
 
     public bool initComplete = false;
 
+    [SerializeField] private List<UiPanel> children = new List<UiPanel>();
     private void Awake() {
         // Ensure singleton instance
         if (Instance == null) {
@@ -26,8 +27,12 @@ public class UIManager : MonoBehaviour {
     } 
     private void Start()
     {
-        var children = GetComponentsInChildren<UiPanel>().ToList();
-        children.ForEach(c =>RegisterPanel(c.PanelName, c));
+        children = GetComponentsInChildren<UiPanel>().ToList();
+        children.ForEach(c =>
+        {
+            c.gameObject.SetActive(true);
+            RegisterPanel(c.PanelName, c);
+        });
         initComplete = true;
     }
 
@@ -39,6 +44,14 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public UiPanel GetPanel(string panelName)
+    {
+        if (!panels.ContainsKey(panelName))
+        {
+            return panels[panelName];
+        }
+        return null;
+    }
     // Show a specific panel by name
     public void ShowPanel(string panelName) {
         if (panels.ContainsKey(panelName)) {

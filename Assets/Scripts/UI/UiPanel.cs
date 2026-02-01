@@ -6,7 +6,9 @@ public class UiPanel : MonoBehaviour
 {
     [SerializeField] protected string panelName;
     public string PanelName { get { return panelName; } }
-    protected VisualElement uiObject;
+    
+    //  Made public so we can hide this during edit mode
+    public VisualElement uiObject;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void OnEnable()
     {
