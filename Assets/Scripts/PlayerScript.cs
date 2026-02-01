@@ -28,6 +28,7 @@ public class PlayerScript : MonoBehaviour
     public float m_ScopedSensitivty = 0.05f;
     Camera m_MainCam;
     public ContactFilter2D m_ContactFilter;
+    public ContactFilter2D m_ContactFilterDossier;
 
     Vector3 delta;
 
@@ -87,12 +88,24 @@ public class PlayerScript : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        if (!m_scopedIn)
-        {
-            return;
-        }
+
         if (context.performed)
         {
+            //Clicking on dossier
+            if (!m_scopedIn)
+            {
+                List<Collider2D> colliders2 = new List<Collider2D>();
+                Physics2D.OverlapCircle(m_Mousepos, 0.05f, m_ContactFilterDossier, colliders2);
+                if (colliders2.Count > 0)
+                {
+                    //open dossier
+                    Debug.Log("Clicked on dossier");
+                    UIManager.Instance.ShowPanel("MissionPanel");
+                }
+                return;
+            }
+
+            //Shooting
             AudioManager.instance.ShootSFX();
             Collider2D gunTarget = null;
             List<Collider2D> colliders = new List<Collider2D>();
