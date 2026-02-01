@@ -1659,12 +1659,28 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 268991775174347593, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 554604288339666369, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 753619292364949808, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1151418303057061046, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
     - target: {fileID: 1151418303057061046, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823086401702025599, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
+      propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3767782819921655698, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
@@ -1706,6 +1722,10 @@ PrefabInstance:
     - target: {fileID: 3767782819921655698, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8659406186847828602, guid: 406f51c921a5f1f45a3fb0a9a224f343, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

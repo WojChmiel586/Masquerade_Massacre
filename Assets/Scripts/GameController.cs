@@ -142,7 +142,7 @@ namespace DefaultNamespace
                         assassinTimer = 99f;
                         //FindNewTarget();
                     }
-                    Cursor.lockState = CursorLockMode.Locked;
+                    //Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Paused:
                     Cursor.lockState = CursorLockMode.None;
