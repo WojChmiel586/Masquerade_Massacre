@@ -44,6 +44,14 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public UiPanel GetPanel(string panelName)
+    {
+        if (!panels.ContainsKey(panelName))
+        {
+            return panels[panelName];
+        }
+        return null;
+    }
     // Show a specific panel by name
     public void ShowPanel(string panelName) {
         if (panels.ContainsKey(panelName)) {

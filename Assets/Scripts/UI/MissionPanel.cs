@@ -41,6 +41,13 @@ namespace UI
         {
             HidePanel();
         }
-        
+
+        public void AssignTargetData()
+        {
+            var targetMaskShape = uiObject.Q<Image>("img-targetMask");
+            var Trait_1 = uiObject.Q<Label>("Trait_1");
+            var Trait_2 = uiObject.Q<Label>("Trait_2");
+            var Trait_3 = uiObject.Q<Label>("Trait_3");
+        }
     }
 }
