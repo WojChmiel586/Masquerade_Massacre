@@ -5,8 +5,11 @@ public class PatrolAgent2D : MonoBehaviour
 {
 	public enum State { IDLE, MOVE, LEAVE, DEAD }
 
-	[Header( "Patrol Area" )]
-	public int m_iAssignedZone;
+	[Header("Guest Identifiers")]
+	public GuestIdentifiers m_GuestIdentifiers;
+	public bool m_IsTheTarget = false;
+
+	[ Header( "Patrol Area" )]
 	public Collider2D m_PatrolArea;
 	public float m_MinMoveDistance = 0.75f;
 	public int m_MaxSampleAttempts = 12;
@@ -22,7 +25,6 @@ public class PatrolAgent2D : MonoBehaviour
 	[SerializeField] List<Color> m_TestColors = new();
 	public Sprite m_ActivityObject;
 	[SerializeField] SpriteRenderer m_HoldingObjectSpriteRenderer;
-	public bool m_IsTheTarget = false;
 
 	[Header("Thinking")]
 	public Vector2 m_ThinkIntervalRange = new Vector2( 0.25f, 0.6f ); // decision cadence (not movement)

@@ -54,13 +54,11 @@ public class PatrolManager2D : MonoBehaviour
 		m_Agents.Add( xAgentObject );
 	}
 
-	public void DeleteSimilarToTargetFeatures( int iPatrolAreaIndex, Sprite xMask, Sprite xBody, Color xMaskColor, Color xTrim )
+	public void DeleteSimilarToTargetFeatures( GuestIdentifiers xGuestIdentifiers )
 	{
-		List<PatrolAgent2D> xAgentsToRemove = new();
 		for ( int i = m_Agents.Count - 1; i >= 0; i-- )
 		{
-			if (m_Agents[ i ].m_iAssignedZone == iPatrolAreaIndex &&
-				m_Agents[ i ].GetComponent<GuestDesignController>().CompareFeatures( xMask, xBody, xMaskColor, xTrim ) )
+			if ( xGuestIdentifiers == m_Agents[ i ].m_GuestIdentifiers )
 			{
 				Destroy( m_Agents[ i ].gameObject );
 				Destroy( m_Agents[ i ] );
