@@ -74,7 +74,7 @@ namespace UI
                     break;
             }
             targetMaskShape.image = targetData.MaskSprite.texture;
-            if (activityImage.image = targetData.ActivitySprite.texture;
+            activityImage.image = targetData.ActivitySprite.texture;
 
         }
     }
