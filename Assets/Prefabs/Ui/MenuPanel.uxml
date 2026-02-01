@@ -2,7 +2,8 @@
     <Style src="project://database/Assets/Prefabs/Ui/Win.uss?fileID=7433441132597879392&amp;guid=b44ae24149013e549bc3bfdcbfa7eaf6&amp;type=3#Win"/>
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.75);">
         <ui:VisualElement name="Panel" style="flex-grow: 1; margin-right: 20%; margin-left: 20%;">
-            <ui:Label text="MASQUERADE MASSACRE" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); -unity-text-align: upper-center; font-size: 28px; -unity-text-auto-size: best-fit 10px 40px; -unity-text-generator: advanced; height: 15%; width: 100%;"/>
+            <ui:Label text="MASQUERADE MASSACRE" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); -unity-text-align: upper-center; font-size: 28px; -unity-text-auto-size: best-fit 10px 40px; -unity-text-generator: advanced; height: 8%; width: 100%;"/>
+            <ui:Label text="Take out the assassins before&#10;they reach the MVP!" style="color: rgb(255, 255, 255); font-size: 12px; align-self: center; align-items: flex-start; align-content: flex-start;"/>
             <ui:Button text="Play" name="Button_PlayAgain" selectable="true" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-items: auto; align-self: center; left: 0%; width: 30%; height: 8%;"/>
             <ui:Button text="Quit" name="Button_Quit" selectable="true" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-items: auto; align-self: center; left: 0%; width: 30%; height: 8%;"/>
         </ui:VisualElement>

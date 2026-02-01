@@ -3,7 +3,7 @@
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.75);">
         <ui:VisualElement name="Panel" style="flex-grow: 1; margin-right: 20%; margin-left: 20%;">
             <ui:Label text="YOU LOSE" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); -unity-text-align: upper-center; font-size: 32px;"/>
-            <ui:Label text="The MVP was assassinated!" style="color: rgb(255, 255, 255); -unity-text-align: upper-center;"/>
+            <ui:Label text="An MVP or innocent was assassinated!" style="color: rgb(255, 255, 255); -unity-text-align: upper-center;"/>
             <ui:Button text="Play Again" name="Button_PlayAgain" selectable="true" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-items: auto; align-self: center; left: 0%; width: 34%; height: 8%;"/>
             <ui:Button text="Quit" name="Button_Quit" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-items: auto; align-self: center; left: 0%; width: 34%; height: 8%;"/>
         </ui:VisualElement>
