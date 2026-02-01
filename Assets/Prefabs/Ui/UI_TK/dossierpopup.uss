@@ -3,7 +3,7 @@
 
 .dossier-popup {
     bottom: 49px;
-    top: 90%;
+    top: 80%;
 }
 
 .dossier-popup:hover {
