@@ -22,6 +22,7 @@ public class PlayerScript : MonoBehaviour
     const float CAMERA_SCOPED_SIZE = 1.5f;
     bool m_scopedIn = false;
     bool startedGame = false;
+    bool finishedGame = false;
     Vector3 m_Mousepos = Vector3.zero;
     [Range(0.005f, 0.1f)]
     public float m_UnscopedSensitivity = 0.05f;
@@ -49,6 +50,11 @@ public class PlayerScript : MonoBehaviour
         {
             m_UnscopedCursor.SetActive(true);
             startedGame = true;
+        }
+        if (!finishedGame && (GameController.Instance.CurrentGameState == GameState.Lose || GameController.Instance.CurrentGameState == GameState.Win))
+        {
+            finishedGame = true;
+            m_UnscopedCursor.SetActive(false);
         }
     }
 
