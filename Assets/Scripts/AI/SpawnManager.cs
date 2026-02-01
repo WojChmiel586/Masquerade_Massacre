@@ -149,6 +149,7 @@ public class SpawnManager : MonoBehaviour
 	{
 		m_PatrolManager = GetComponent<PatrolManager2D>();
 		m_GameController = GameController.Instance;
+		m_GameController.OnTargetKilled();
 		SpawnVIP();
 	}
 
