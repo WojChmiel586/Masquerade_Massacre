@@ -42,6 +42,8 @@ public class GuestIdPacket
 		m_trait = mTraitType;
 		if (m_trait is GuestTraits.BodyType) m_bodySprite = sprite;
 		else if (m_trait is GuestTraits.MaskDesign) m_maskSprite = sprite;
+		else if (m_trait == GuestTraits.Activity) m_activity = sprite;
+
 	}
 
 	public GuestIdPacket(GuestTraits mTraitType, Color traitColour)
@@ -141,6 +143,7 @@ public class SpawnManager : MonoBehaviour
 	public Collider2D m_VIPPatrolZone;
 
 	GuestIdentifiers m_CurrentTargetIdentifiers = new();
+	public GuestIdentifiers CurrentTargetIdentifiers => m_CurrentTargetIdentifiers;
 
 	void Start()
 	{
