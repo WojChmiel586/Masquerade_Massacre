@@ -77,6 +77,10 @@ public class PatrolManager2D : MonoBehaviour
 			{
 				m_Agents[ i ].DoorDespawn();
 			}
+			else
+			{
+				m_Agents[ i ].Shot();
+			}
 		}
 	}
 }
