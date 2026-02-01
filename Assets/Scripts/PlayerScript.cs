@@ -45,7 +45,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         MouseAim();
-        if (!startedGame) 
+        if (!startedGame && GameController.Instance.CurrentGameState == GameState.Playing) 
         {
             m_UnscopedCursor.SetActive(true);
             startedGame = true;
