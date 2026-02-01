@@ -87,13 +87,14 @@ public class PlayerScript : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        Collider2D gunTarget = null;
         if (!m_scopedIn)
         {
             return;
         }
         if (context.performed)
         {
+            AudioManager.instance.ShootSFX();
+            Collider2D gunTarget = null;
             List<Collider2D> colliders = new List<Collider2D>();
             int test = Physics2D.OverlapCircle(m_Mousepos, 0.1f, m_ContactFilter, colliders);
             if (colliders.Count > 0)
@@ -114,6 +115,7 @@ public class PlayerScript : MonoBehaviour
 
                 }
                 gunTarget.transform.GetComponentInParent<PatrolAgent2D>().m_FlagForDeletion = true;
+
             }
         }
 
