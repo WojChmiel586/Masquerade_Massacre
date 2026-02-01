@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     const float CAMERA_UNSCOPED_SIZE = 5.4f;
     const float CAMERA_SCOPED_SIZE = 1.5f;
     bool m_scopedIn = false;
+    bool startedGame = false;
     Vector3 m_Mousepos = Vector3.zero;
     [Range(0.005f, 0.1f)]
     public float m_UnscopedSensitivity = 0.05f;
@@ -28,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     public float m_ScopedSensitivty = 0.05f;
     Camera m_MainCam;
     public ContactFilter2D m_ContactFilter;
+    public ContactFilter2D m_ContactFilterDossier;
 
     Vector3 delta;
 
@@ -43,11 +45,16 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         MouseAim();
+        if (!startedGame && GameController.Instance.CurrentGameState == GameState.Playing) 
+        {
+            m_UnscopedCursor.SetActive(true);
+            startedGame = true;
+        }
     }
 
     public void ZoomIn(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && GameController.Instance.CurrentGameState == GameState.Playing)
         {
             m_scopedIn = true;
         }
@@ -87,12 +94,28 @@ public class PlayerScript : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        if (!m_scopedIn)
-        {
-            return;
-        }
+
         if (context.performed)
         {
+            if (GameController.Instance.CurrentGameState != GameState.Playing)
+            {
+                return;
+            }
+            //Clicking on dossier
+            if (!m_scopedIn)
+            {
+                List<Collider2D> colliders2 = new List<Collider2D>();
+                Physics2D.OverlapCircle(m_Mousepos, 0.05f, m_ContactFilterDossier, colliders2);
+                if (colliders2.Count > 0)
+                {
+                    //open dossier
+                    Debug.Log("Clicked on dossier");
+                    UIManager.Instance.ShowPanel("MissionPanel");
+                }
+                return;
+            }
+
+            //Shooting
             AudioManager.instance.ShootSFX();
             Collider2D gunTarget = null;
             List<Collider2D> colliders = new List<Collider2D>();
@@ -118,11 +141,5 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(m_Mousepos, 0.1f);
     }
 }

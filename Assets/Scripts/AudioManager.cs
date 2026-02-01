@@ -22,6 +22,9 @@ public class AudioManager : MonoBehaviour
     //dossier
     public AudioClip dossierSound;
 
+    //crowd
+    public AudioClip crowdSound;
+
     //Audio Sources
     public AudioSource ShootSource;
     public AudioSource MusicSource;
@@ -61,10 +64,12 @@ public class AudioManager : MonoBehaviour
     }
     public void FailSFX()
     {
+        StopOtherSounds();
         EndGameSource.PlayOneShot(loseGame);
     }
     public void WinSFX()
     {
+        StopOtherSounds();
         EndGameSource.PlayOneShot(winGame);
     }
     public void ShootSFX()
@@ -79,7 +84,14 @@ public class AudioManager : MonoBehaviour
     public void PlayGameMusic()
     {
         MusicSource.clip = gameMusic;
+        CrowdSource.Play();
         MusicSource.Play();
+    }
+
+    void StopOtherSounds()
+    {
+        MusicSource.Stop();
+        CrowdSource.Stop();
     }
 
 }
