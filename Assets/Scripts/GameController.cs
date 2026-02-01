@@ -150,14 +150,15 @@ namespace DefaultNamespace
             switch (newState)
             {
                 case GameState.Playing:
+                    Cursor.lockState = CursorLockMode.Locked;
                     if (oldState is GameState.Menu)
                     {
                         roundTimer = roundTimeLimit;
                         assassinTimer = 99f;
                         AudioManager.instance.PlayGameMusic();
                         FindNewTarget();
+                        UIManager.Instance.ShowPanel("MissionPanel");
                     }
-                    Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Paused:
                     Cursor.lockState = CursorLockMode.None;
