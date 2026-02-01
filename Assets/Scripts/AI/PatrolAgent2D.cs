@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class PatrolAgent2D : MonoBehaviour
 {
-	public enum State { IDLE, MOVE, LEAVE }
+	public enum State { IDLE, MOVE, LEAVE, DEAD }
 
-	[Header("Patrol Area")]
+	[Header( "Patrol Area" )]
+	public int m_iAssignedZone;
 	public Collider2D m_PatrolArea;
 	public float m_MinMoveDistance = 0.75f;
 	public int m_MaxSampleAttempts = 12;
@@ -16,8 +17,12 @@ public class PatrolAgent2D : MonoBehaviour
 	public float m_ChanceStandStill = 0.35f; // probability to just idle again instead of moving
 	public float m_ChanceToLeave = 0.05f; // probability to leave the event
 	public float m_ChanceToChooseADifferentActivity = 0.1f; // probability to change target at the event
-	public Vector2 m_DoorToLeaveFrom;
+	public DoorController m_DoorToEnterFrom;
+	public DoorController m_DoorToLeaveFrom;
 	[SerializeField] List<Color> m_TestColors = new();
+	public Sprite m_ActivityObject;
+	[SerializeField] SpriteRenderer m_HoldingObjectSpriteRenderer;
+	public bool m_IsTheTarget = false;
 
 	[Header("Thinking")]
 	public Vector2 m_ThinkIntervalRange = new Vector2( 0.25f, 0.6f ); // decision cadence (not movement)
@@ -26,7 +31,7 @@ public class PatrolAgent2D : MonoBehaviour
 	[Header("Debug")]
 	public bool m_Debug;
 
-	public State m_CurrentState { get; private set; } = State.IDLE;
+	public State m_CurrentState { get; private set; } = State.MOVE;
 
 	public bool m_FlagForDeletion = false;
 	public bool m_ForceDelete = false;
@@ -37,11 +42,15 @@ public class PatrolAgent2D : MonoBehaviour
 	SpriteRenderer m_SpriteRenderer;
 	Animator m_Animator;
 
+	bool m_bFirstMove;
+
 	void Start()
 	{
 		m_RigidBody = GetComponent<Rigidbody2D>();
 		m_Animator = GetComponent<Animator>();
 		m_SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+		m_bFirstMove = true;
 
 		// Stagger start times to avoid everyone thinking at frame 0
 		m_NextThinkTime = Time.time + Random.Range( 0f, m_ThinkIntervalRange.y );
@@ -50,11 +59,16 @@ public class PatrolAgent2D : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if ( m_CurrentState == State.IDLE ) return;
+		if ( m_CurrentState == State.IDLE || m_CurrentState == State.DEAD ) return;
 
 		Vector2 xPos = m_RigidBody.position;
 		Vector2 xDir = ( m_Target - xPos );
 		float fDist = xDir.magnitude;
+
+		if ( m_CurrentState == State.LEAVE && fDist < 1.0f )
+		{
+			m_DoorToLeaveFrom.OpenDoor();
+		}
 
 		if ( fDist < 0.05f )
 		{
@@ -62,6 +76,12 @@ public class PatrolAgent2D : MonoBehaviour
 			{
 				m_FlagForDeletion = true;
 			}
+
+			if ( m_ActivityObject != null )
+			{
+				m_HoldingObjectSpriteRenderer.sprite = m_ActivityObject;
+			}
+
 			EnterIdle();
 			return;
 		}
@@ -87,7 +107,7 @@ public class PatrolAgent2D : MonoBehaviour
 				return;
 			}
 
-			if ( Random.value < m_ChanceToLeave )
+			if ( !m_bFirstMove && !m_IsTheTarget && Random.value < m_ChanceToLeave )
 			{
 				EnterLeave();
 				return;
@@ -95,6 +115,12 @@ public class PatrolAgent2D : MonoBehaviour
 
 			if ( TryPickRandomPoint( out var xPoint ) )
 			{
+				if ( m_bFirstMove )
+				{
+					transform.position = m_DoorToEnterFrom.transform.position;
+					m_DoorToEnterFrom.OpenDoor();
+					m_bFirstMove = false;
+				}
 				m_Target = xPoint;
 				m_CurrentState = State.MOVE;
 				m_Animator.SetBool( "Walking", true );
@@ -122,6 +148,7 @@ public class PatrolAgent2D : MonoBehaviour
 		float fTime = Random.Range( m_IdleTimeRange.x, m_IdleTimeRange.y );
 		m_IdleUntil = Time.time + fTime;
 		m_Animator.SetBool( "Walking", false );
+
 		if ( m_Debug )
 		{
 			m_SpriteRenderer.color = m_TestColors[ 0 ];
@@ -131,7 +158,7 @@ public class PatrolAgent2D : MonoBehaviour
 	void EnterLeave()
 	{
 		m_CurrentState = State.LEAVE;
-		m_Target = m_DoorToLeaveFrom;
+		m_Target = m_DoorToLeaveFrom.transform.position;
 		m_Animator.SetBool( "Walking", true );
 		if ( m_Debug )
 		{
@@ -173,10 +200,15 @@ public class PatrolAgent2D : MonoBehaviour
 		m_NextThinkTime = fCurrentTime + Random.Range( m_ThinkIntervalRange.x, m_ThinkIntervalRange.y );
 	}
 
-	public void DoorDespawn( Vector2 xDespawnLocation )
+	public void DoorDespawn()
 	{
 		m_PatrolArea = null;
-		m_Target = xDespawnLocation;
+		m_Target = m_DoorToLeaveFrom.transform.position;
 		m_CurrentState = State.LEAVE;
+	}
+
+	public void Shot()
+	{
+		m_CurrentState = State.DEAD;
 	}
 }
