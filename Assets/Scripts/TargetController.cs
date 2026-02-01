@@ -14,7 +14,7 @@ namespace DefaultNamespace
         private SpawnManager spawnManager;
         private void Start()
         {
-            spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+            spawnManager = GameObject.Find("AIManager").GetComponent<SpawnManager>();
         }
 
         public GuestIdPacket FindCurrentTarget()
@@ -27,5 +27,10 @@ namespace DefaultNamespace
 		{
 			spawnManager.SpawnTarget();
 		}
+
+        public GuestIdentifiers GetIdentifiers()
+        {
+            return spawnManager.CurrentTargetIdentifiers;
+        }
     }
 }

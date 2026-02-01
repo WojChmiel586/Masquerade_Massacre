@@ -31,17 +31,19 @@ public class GuestIdPacket
 	public GuestIdPacket(GuestTraits trait, Sprite activity, Sprite bodySprite, Sprite maskSprite, Color maskColour, Color maskTrim)
 	{
 		m_trait = GuestTraits.All;
-		this.m_maskSprite = m_maskSprite;
+		this.m_maskSprite = maskSprite;
 		m_activity = activity;
 		this.m_maskColour = maskColour;
 		this.m_bodySprite = bodySprite;
-		this.m_maskTrim = m_maskTrim;
+		this.m_maskTrim = maskTrim;
 	}
 	public GuestIdPacket(GuestTraits mTraitType, Sprite sprite)
 	{
 		m_trait = mTraitType;
 		if (m_trait is GuestTraits.BodyType) m_bodySprite = sprite;
 		else if (m_trait is GuestTraits.MaskDesign) m_maskSprite = sprite;
+		else if (m_trait == GuestTraits.Activity) m_activity = sprite;
+
 	}
 
 	public GuestIdPacket(GuestTraits mTraitType, Color traitColour)
@@ -141,6 +143,7 @@ public class SpawnManager : MonoBehaviour
 	public Collider2D m_VIPPatrolZone;
 
 	GuestIdentifiers m_CurrentTargetIdentifiers = new();
+	public GuestIdentifiers CurrentTargetIdentifiers => m_CurrentTargetIdentifiers;
 
 	void Awake()
 	{

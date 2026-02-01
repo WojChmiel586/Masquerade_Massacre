@@ -34,9 +34,10 @@
                                             <ui:VisualElement name="Section_Obj" language-direction="Inherit" style="width: 69%; align-items: center; align-self: flex-start; justify-content: flex-start; align-content: auto; color: rgb(0, 0, 0); padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; flex-grow: 1; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; height: 50%;">
                                                 <ui:VisualElement name="bg" picking-mode="Position" class="panel_bg" style="flex-grow: 1; opacity: 1; width: 100%; height: 100%; flex-basis: 100%; max-width: initial; max-height: initial; display: flex; flex-direction: column; flex-wrap: wrap; align-items: flex-start; justify-content: flex-start; align-self: center; align-content: center; background-color: rgba(0, 0, 0, 0.16); -unity-slice-type: sliced; overflow: visible; top: 0;">
                                                     <ui:Label text="Traits" name="t_yourTarget" style="justify-content: flex-end; align-self: center; -unity-text-align: upper-center; font-size: 24px; color: rgb(255, 255, 255); -unity-text-outline-color: rgb(0, 0, 0);"/>
-                                                    <ui:Label text="Likes drinking" name="Trait_1"/>
-                                                    <ui:Label text="Likes Dancing" name="Trait_2"/>
-                                                    <ui:Label text="Likes KILLING MVPs" name="Trait_3"/>
+                                                    <ui:VisualElement style="flex-grow: 1; align-self: center; flex-direction: column;">
+                                                        <ui:Label text="Likes doing:" name="Trait_1" style="align-self: center; justify-content: space-around; align-items: center; align-content: center;"/>
+                                                        <ui:Image name="image-activity" source="project://database/Assets/Prefabs/Art%20Assets/table.png?fileID=2800000&amp;guid=36d7fe36d00fed74387caded1bcfb149&amp;type=3#table"/>
+                                                    </ui:VisualElement>
                                                 </ui:VisualElement>
                                             </ui:VisualElement>
                                         </ui:VisualElement>
