@@ -230,7 +230,14 @@ public class PatrolAgent2D : MonoBehaviour
 		{
 			m_CurrentState = State.DEAD;
 			m_Animator.SetBool( "Dead", true );
-			GameController.Instance.OnTargetKilled();
+			if( m_IsTheTarget)
+			{
+				GameController.Instance.OnTargetKilled();
+			}
+			if( m_IsVIP )
+			{
+				GameController.Instance.m_VIPDead = true;
+			}
 		}
 	}
 }

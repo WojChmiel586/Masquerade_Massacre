@@ -70,9 +70,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f3e90debb2f938f4fa2fec325e71a64f, type: 3}
   - {fileID: 21300000, guid: 11478653213702942beae9c4b184aab8, type: 3}
   - {fileID: 21300000, guid: 403eed57672b24f438f4418ec9952b4b, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_SpawnAreas:
   - {fileID: 0}
   - {fileID: 0}
@@ -105,5 +102,5 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0.8160639, a: 1}
   - {r: 0, g: 0.6981132, b: 0.13689534, a: 1}
   - {r: 0.7182925, g: 0, b: 0.72955966, a: 1}
-  m_VIPMask: {fileID: 0}
+  m_VIPMask: {fileID: 21300000, guid: efd1d736894d72e46bff6bf27dd99b46, type: 3}
   m_VIPPatrolZone: {fileID: 0}

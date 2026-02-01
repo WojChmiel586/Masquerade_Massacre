@@ -22,7 +22,9 @@ namespace DefaultNamespace
         [SerializeField] private float assassinTimerMin;
         [SerializeField] private float assassinTimerMax;
 
-        [FormerlySerializedAs("_targetController")] public TargetController TargetController;
+		public bool m_VIPDead = false;
+
+        public TargetController TargetController;
 
         private float assassinTimer;
 
@@ -84,6 +86,7 @@ namespace DefaultNamespace
             {
                 gameState.SetState(GameState.Menu);
                 deferGameStart = false;
+				m_VIPDead = false;
             }
             CheckWinState();
             CheckLoseState();
@@ -120,7 +123,8 @@ namespace DefaultNamespace
             var gameIsRunning = CurrentGameState is GameState.Playing;
             var timerHasExpired = assassinTimer <= 0;
             var roundTimerHasExpired = roundTimer <= 0;
-            if (gameIsRunning && timerHasExpired && !roundTimerHasExpired)
+            if ( ( gameIsRunning && timerHasExpired && !roundTimerHasExpired ) 
+				|| m_VIPDead )
             {
                 gameState.SetState(GameState.Lose);
             }
@@ -130,8 +134,8 @@ namespace DefaultNamespace
         {
             //  Find a new assassin target and set a new assassin timer
             assassinTimer = Random.Range(assassinTimerMin, assassinTimerMax);
-            _targetController.SpawnNewTarget();
-            _targetController.FindCurrentTarget();
+			TargetController.SpawnNewTarget();
+			TargetController.FindCurrentTarget();
         }
 
         private void OnGameStateChange(GameState newState, GameState oldState)
