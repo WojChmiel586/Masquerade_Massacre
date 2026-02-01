@@ -44,6 +44,9 @@ public class PatrolAgent2D : MonoBehaviour
 
 	bool m_bFirstMove;
 
+	[SerializeField]
+	float m_TimeToDie;
+
 	void Start()
 	{
 		m_RigidBody = GetComponent<Rigidbody2D>();
@@ -59,7 +62,17 @@ public class PatrolAgent2D : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if ( m_CurrentState == State.IDLE || m_CurrentState == State.DEAD ) return;
+		if ( m_CurrentState == State.IDLE ) return;
+
+		if( m_CurrentState == State.DEAD )
+		{
+			m_TimeToDie -= Time.deltaTime;
+			if( m_TimeToDie <= 0.0f )
+			{
+				m_FlagForDeletion = true;
+			}
+			return;
+		}
 
 		Vector2 xPos = m_RigidBody.position;
 		Vector2 xDir = ( m_Target - xPos );
@@ -210,5 +223,6 @@ public class PatrolAgent2D : MonoBehaviour
 	public void Shot()
 	{
 		m_CurrentState = State.DEAD;
+		m_Animator.SetBool( "Dead", true );
 	}
 }
