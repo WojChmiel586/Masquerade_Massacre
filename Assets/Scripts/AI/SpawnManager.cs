@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -125,6 +126,7 @@ public class SpawnManager : MonoBehaviour
 	public int m_MaxAgents;
 
 	PatrolManager2D m_PatrolManager;
+	GameController m_GameController;
 
 	[SerializeField] InputAction.CallbackContext m_CallbackSpace;
 
@@ -135,21 +137,21 @@ public class SpawnManager : MonoBehaviour
 	public List<Sprite> m_HandsR = new();
 	public List<UnityEngine.Color> m_MaskColours = new();
 
+	public Sprite m_VIPMask;
+	public Collider2D m_VIPPatrolZone;
+
 	GuestIdentifiers m_CurrentTargetIdentifiers = new();
 
 	void Awake()
 	{
 		m_PatrolManager = GetComponent<PatrolManager2D>();
-
-		for ( int i = 0; i < m_MaxAgents; i++ )
-		{
-			InstantSpawn();
-		}
+		m_GameController = GameController.Instance;
+		SpawnVIP();
 	}
 
 	void LateUpdate()
 	{
-		if ( m_PatrolManager.m_Agents.Count < m_MaxAgents )
+		if ( m_GameController.CurrentGameState == GameState.Playing && m_PatrolManager.m_Agents.Count < m_MaxAgents )
 		{
 			InstantSpawn();
 		}
@@ -219,12 +221,15 @@ public class SpawnManager : MonoBehaviour
 	{
 		PatrolAgent2D xAgent = InstantSpawn();
 		xAgent.m_IsTheTarget = true;
-		SpawnTarget( xAgent.m_GuestIdentifiers );
+		SetTargetIdentifiers( xAgent.m_GuestIdentifiers );
 	}
 
-	void StartDoorDespawn( PatrolAgent2D xDespawningAgent )
+	public void SpawnVIP()
 	{
-		xDespawningAgent.DoorDespawn();
+		PatrolAgent2D xAgent = InstantSpawn();
+		xAgent.m_IsVIP = true;
+		xAgent.m_PatrolArea = m_VIPPatrolZone;
+		xAgent.GetComponent<GuestDesignController>().SetSpecific( m_VIPMask );
 	}
 
 	public void OnJump()
@@ -232,7 +237,7 @@ public class SpawnManager : MonoBehaviour
 		SpawnTarget();
 	}
 
-	public void SpawnTarget( GuestIdentifiers xGuestIdentifiers )
+	public void SetTargetIdentifiers( GuestIdentifiers xGuestIdentifiers )
 	{
 		m_PatrolManager.DeleteSimilarToTargetFeatures( xGuestIdentifiers );
 		m_CurrentTargetIdentifiers = xGuestIdentifiers;
