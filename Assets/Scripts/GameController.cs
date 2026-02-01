@@ -153,7 +153,7 @@ namespace DefaultNamespace
                         AudioManager.instance.PlayGameMusic();
                         FindNewTarget();
                     }
-                    //Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Paused:
                     Cursor.lockState = CursorLockMode.None;

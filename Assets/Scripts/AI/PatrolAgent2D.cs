@@ -221,7 +221,16 @@ public class PatrolAgent2D : MonoBehaviour
 	{
 		m_PatrolArea = null;
 		m_Target = m_DoorToLeaveFrom.transform.position;
-		m_CurrentState = State.LEAVE;
+		if( m_CurrentState != State.DEAD )
+		{
+			if ( m_bFirstMove )
+			{
+				m_FlagForDeletion = true;
+			}
+			m_Animator.SetBool( "Walking", true );
+			m_CurrentState = State.LEAVE;
+			m_MoveSpeed = 4;
+		}
 	}
 
 	public void Shot()
@@ -234,7 +243,7 @@ public class PatrolAgent2D : MonoBehaviour
 			{
 				GameController.Instance.OnTargetKilled();
 			}
-			if( m_IsVIP )
+			else
 			{
 				GameController.Instance.m_VIPDead = true;
 			}

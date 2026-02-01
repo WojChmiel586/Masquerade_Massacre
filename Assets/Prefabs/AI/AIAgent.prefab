@@ -161,10 +161,10 @@ MonoBehaviour:
   m_HoldingObjectSpriteRenderer: {fileID: 7119314506426118688}
   m_ThinkIntervalRange: {x: 0.25, y: 0.6}
   m_NextThinkTime: 25.9461
-  m_Debug: 1
+  m_Debug: 0
   m_FlagForDeletion: 0
   m_ForceDelete: 0
-  m_TimeToDie: 2
+  m_TimeToDie: 50
 --- !u!50 &3103963919152610413
 Rigidbody2D:
   serializedVersion: 5
