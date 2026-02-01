@@ -22,7 +22,7 @@ namespace DefaultNamespace
         [SerializeField] private float assassinTimerMin;
         [SerializeField] private float assassinTimerMax;
 
-        [FormerlySerializedAs("_targetController")] public TargetController TargetController;
+        public TargetController TargetController;
 
         private float assassinTimer;
 
