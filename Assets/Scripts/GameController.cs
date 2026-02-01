@@ -103,6 +103,9 @@ namespace DefaultNamespace
                 gameState.SetState(GameState.Lose);
                 setLose = false;
             }
+            
+            roundTimer -= Time.deltaTime;
+            assassinTimer -= Time.deltaTime;
         }
 
         private void CheckWinState()
@@ -134,7 +137,8 @@ namespace DefaultNamespace
         private void FindNewTarget()
         {
             //  Find a new assassin target and set a new assassin timer
-            assassinTimer = Random.Range(assassinTimerMin, assassinTimerMax);
+            assassinTimerLimit = Random.Range(assassinTimerMin, assassinTimerMax);
+            assassinTimer = assassinTimerLimit;
 			TargetController.SpawnNewTarget();
 			TargetController.FindCurrentTarget();
         }
@@ -153,7 +157,7 @@ namespace DefaultNamespace
                         AudioManager.instance.PlayGameMusic();
                         FindNewTarget();
                     }
-                    //Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.lockState = CursorLockMode.Locked;
                     break;
                 case GameState.Paused:
                     Cursor.lockState = CursorLockMode.None;
