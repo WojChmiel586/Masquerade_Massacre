@@ -154,10 +154,13 @@ MonoBehaviour:
   - {r: 0.25715178, g: 0.9811321, b: 0, a: 1}
   - {r: 0, g: 0.77571654, b: 1, a: 1}
   - {r: 0.98742133, g: 0, b: 0, a: 1}
+  m_ActivityObject: {fileID: 0}
+  m_HoldingObjectSpriteRenderer: {fileID: 7119314506426118688}
   m_ThinkIntervalRange: {x: 0.25, y: 0.6}
   m_NextThinkTime: 25.9461
   m_Debug: 0
   m_FlagForDeletion: 0
+  m_ForceDelete: 0
 --- !u!50 &3103963919152610413
 Rigidbody2D:
   serializedVersion: 5
@@ -431,6 +434,11 @@ SpriteRenderer:
 --- !u!212 &6993555892028757391 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 385128550088068648, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
+  m_PrefabInstance: {fileID: 7230065654276725671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7119314506426118688 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 475895798542559623, guid: a8fa122e4050949448bf6089d7b3decc, type: 3}
   m_PrefabInstance: {fileID: 7230065654276725671}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7400960301693094094 stripped

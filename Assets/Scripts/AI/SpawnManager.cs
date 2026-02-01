@@ -7,7 +7,10 @@ using UnityEngine.InputSystem;
 public class SpawnManager : MonoBehaviour
 {
 	public List<Collider2D> m_PatrolAreas = new();
-	public List<Collider2D> m_SpawnAreas = new();
+	public List<Sprite> m_PatrolActivities = new();
+	public List<DoorController> m_SpawnAreas = new();
+
+	public Transform m_SpawnLocation;
 
 	public GameObject m_AgentPrefab;
 	public int m_MaxAgents;
@@ -23,6 +26,7 @@ public class SpawnManager : MonoBehaviour
 	public List<Sprite> m_HandsR = new();
 	public List<UnityEngine.Color> m_MaskColours = new();
 
+	int iCurrentTargetAssignedZone;
 	int iCurrentTargetMaskValue;
 	int iCurrentTargetBodyValue;
 	int iMaskColorValue;
@@ -46,13 +50,12 @@ public class SpawnManager : MonoBehaviour
 		}
 	}
 
-	PatrolAgent2D InstantSpawn( Vector2 xSpawnPosition, bool bTarget = false )
+	PatrolAgent2D InstantSpawn( bool bTarget = false )
 	{
-		GameObject xNewAgent = Instantiate( m_AgentPrefab, xSpawnPosition, Quaternion.identity, this.transform );
+		GameObject xNewAgent = Instantiate( m_AgentPrefab, m_SpawnLocation.transform.position, Quaternion.identity, this.transform );
 		PatrolAgent2D xAgentPatrol = xNewAgent.GetComponent<PatrolAgent2D>();
-		int iPatrolAreaIndex = Random.Range( 0, m_PatrolAreas.Count );
-		xAgentPatrol.m_PatrolArea = m_PatrolAreas[ iPatrolAreaIndex ];
-		
+
+		int iPatrolAreaIndex = -1;
 		int iMaskAttempt = -1;
 		int iBodyType = -1;
 		int iMaskColor = -1;
@@ -61,12 +64,16 @@ public class SpawnManager : MonoBehaviour
 		bool bSpawn = false;
 		while ( !bSpawn )
 		{
+			iPatrolAreaIndex = Random.Range( 0, m_PatrolAreas.Count );
 			iMaskAttempt = Random.Range( 0, m_Masks.Count );
 			iBodyType = Random.Range( 0, m_Bodies.Count );
 			iMaskColor = Random.Range( 0, m_MaskColours.Count );
 			iMaskTrim = Random.Range( 0, m_MaskColours.Count );
 
-			if ( iCurrentTargetMaskValue == iMaskAttempt &&
+			bool bCheckActivity = m_PatrolActivities[ iPatrolAreaIndex ] != null;
+
+			if ( ( bCheckActivity && iCurrentTargetAssignedZone == iPatrolAreaIndex ) &&
+			iCurrentTargetMaskValue == iMaskAttempt &&
 			iCurrentTargetBodyValue == iBodyType &&
 			iMaskColorValue == iMaskColor &&
 			iTrimValue == iMaskTrim )
@@ -79,6 +86,9 @@ public class SpawnManager : MonoBehaviour
 			}
 		}
 
+		xAgentPatrol.m_iAssignedZone = iPatrolAreaIndex;
+		xAgentPatrol.m_PatrolArea = m_PatrolAreas[ iPatrolAreaIndex ];
+		xAgentPatrol.m_ActivityObject = m_PatrolActivities[ iPatrolAreaIndex ];
 		Sprite xMask = m_Masks[ iMaskAttempt ];
 		Sprite xBody = m_Bodies[ iBodyType ];
 		Sprite xHandLeft = m_HandsL[ iBodyType ];
@@ -89,45 +99,42 @@ public class SpawnManager : MonoBehaviour
 		xNewAgent.GetComponent<GuestDesignController>().SetGuestElements(
 			xMask, xBody, xHandLeft, xHandRight, xMaskColor, xMaskTrim );
 
-		// Double check that the agent is assigned a patrol area
-		if ( xAgentPatrol.m_PatrolArea == null )
-		{
-			xAgentPatrol.m_PatrolArea = m_PatrolAreas[ 0 ];
-		}
 
-		if( bTarget )
+		if ( bTarget )
 		{
-			SpawnTarget( iMaskAttempt, iBodyType, iMaskColor, iMaskTrim );
+			xAgentPatrol.m_IsTheTarget = true;
+			SpawnTarget( iPatrolAreaIndex, iMaskAttempt, iBodyType, iMaskColor, iMaskTrim );
 		}
 
 		m_PatrolManager.AddAgent( xAgentPatrol );
 
-		xAgentPatrol.m_DoorToLeaveFrom = m_SpawnAreas[ Random.Range( 0, m_SpawnAreas.Count ) ].transform.position;
+		xAgentPatrol.m_DoorToEnterFrom = m_SpawnAreas[ Random.Range( 0, m_SpawnAreas.Count ) ];
+		xAgentPatrol.m_DoorToLeaveFrom = m_SpawnAreas[ Random.Range( 0, m_SpawnAreas.Count ) ];
 
 		return xAgentPatrol;
 	}
 
 	void DoorSpawn()
 	{
-		PatrolAgent2D xAgent = InstantSpawn( m_SpawnAreas[ Random.Range( 0, m_SpawnAreas.Count ) ].transform.position );
+		PatrolAgent2D xAgent = InstantSpawn();
 	}
 
 	void StartDoorDespawn( PatrolAgent2D xDespawningAgent )
 	{
-		xDespawningAgent.DoorDespawn( m_SpawnAreas[ Random.Range( 0, m_SpawnAreas.Count ) ].transform.position );
+		xDespawningAgent.DoorDespawn();
 	}
 
 	public void OnJump()
 	{
-		InstantSpawn( m_SpawnAreas[ 0 ].transform.position, true );
+		InstantSpawn( true );
 	}
 
-	public void SpawnTarget( int xMask, int xBody, int xMaskColor, int xTrim )
+	public void SpawnTarget( int iPatrolAreaIndex, int iMask, int iBody, int iMaskColor, int iTrim )
 	{
-		m_PatrolManager.DeleteSimilarToTargetFeatures( m_Masks[ xMask ], m_Bodies[ xBody ], m_MaskColours[ xMaskColor ], m_MaskColours[ xTrim ] );
-		iCurrentTargetMaskValue = xMask;
-		iCurrentTargetBodyValue = xBody;
-		iMaskColorValue = xMaskColor;
-		iTrimValue = xTrim;
+		m_PatrolManager.DeleteSimilarToTargetFeatures( iPatrolAreaIndex, m_Masks[ iMask ], m_Bodies[ iBody ], m_MaskColours[ iMaskColor ], m_MaskColours[ iTrim ] );
+		iCurrentTargetMaskValue = iMask;
+		iCurrentTargetBodyValue = iBody;
+		iMaskColorValue = iMaskColor;
+		iTrimValue = iTrim;
 	}
 }
