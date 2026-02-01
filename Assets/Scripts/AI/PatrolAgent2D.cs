@@ -8,6 +8,7 @@ public class PatrolAgent2D : MonoBehaviour
 	[Header("Guest Identifiers")]
 	public GuestIdentifiers m_GuestIdentifiers;
 	public bool m_IsTheTarget = false;
+	public bool m_IsVIP = false;
 
 	[ Header( "Patrol Area" )]
 	public Collider2D m_PatrolArea;
@@ -122,7 +123,7 @@ public class PatrolAgent2D : MonoBehaviour
 				return;
 			}
 
-			if ( !m_bFirstMove && !m_IsTheTarget && Random.value < m_ChanceToLeave )
+			if ( !m_bFirstMove && !( m_IsTheTarget || m_IsVIP ) && Random.value < m_ChanceToLeave )
 			{
 				EnterLeave();
 				return;

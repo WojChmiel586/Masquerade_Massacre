@@ -35,4 +35,11 @@ public class GuestDesignController : MonoBehaviour
 		m_Mask.color = xMaskColor;
 		m_Trim.color = xTrim;
 	}
+
+	public void SetSpecific( Sprite xMask )
+	{
+		m_Mask.sprite = xMask;
+		m_Mask.color = Color.white;
+		m_Trim.sprite = null;
+	}
 }
