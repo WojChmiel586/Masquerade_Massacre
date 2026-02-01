@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject m_ScopeOverlay;
     public GameObject m_Scope;
     public GameObject m_ScopeSprite;
+    public GameObject m_UnscopedCursor;
     public CinemachineCamera m_UnscopedCamera;
     public CinemachineCamera m_ScopedCamera;
     public PlayerInput m_input;
@@ -60,6 +61,7 @@ public class PlayerScript : MonoBehaviour
         m_UnscopedCamera.gameObject.SetActive(!m_scopedIn);
         m_ScopedCamera.gameObject.SetActive(m_scopedIn);
         m_ScopeSprite.SetActive(m_scopedIn);
+        m_UnscopedCursor.SetActive(!m_scopedIn);
 
     }
 
@@ -85,13 +87,14 @@ public class PlayerScript : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        Collider2D gunTarget = null;
         if (!m_scopedIn)
         {
             return;
         }
         if (context.performed)
         {
+            AudioManager.instance.ShootSFX();
+            Collider2D gunTarget = null;
             List<Collider2D> colliders = new List<Collider2D>();
             int test = Physics2D.OverlapCircle(m_Mousepos, 0.1f, m_ContactFilter, colliders);
             if (colliders.Count > 0)
