@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Prefabs/Ui/UI_TK/dossierpopup.uss?fileID=7433441132597879392&amp;guid=e44fe7ad5fc062f4d8cdcaad94c8576c&amp;type=3#dossierpopup"/>
+    <ui:VisualElement name="VisualElement" class="dossier-popup" style="flex-grow: 1; flex-direction: row; align-self: flex-start; align-items: flex-start; justify-content: center; background-color: rgba(0, 0, 0, 0.31); -unity-background-image-tint-color: rgb(0, 0, 0); align-content: auto; height: 30%; width: 25%; max-height: 24%; position: absolute; bottom: 0; flex-wrap: wrap; visibility: visible; overflow: visible; margin-left: 6%; padding-top: 0%; padding-right: 0%; padding-bottom: 0%; padding-left: 0%;">
+        <ui:VisualElement style="flex-grow: 1; width: 100%; height: 10%;"/>
+        <ui:VisualElement style="flex-grow: 1; position: absolute; width: 76%; height: 50%; top: 23%; align-items: flex-start; justify-content: center; align-self: flex-start; background-color: rgb(255, 239, 231);"/>
+        <ui:Image source="project://database/Assets/Prefabs/Art%20Assets/folder.png?fileID=2800000&amp;guid=84f618f3a3874c542803af4fe47c6466&amp;type=3#folder" name="Image" style="flex-grow: 1; height: 100%; align-items: center; justify-content: center;">
+            <ui:Image source="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-6527069497977903076&amp;guid=1eb9f962d539ef3458a50bcf905c77ec&amp;type=3#console.warnicon@2x" scale-mode="ScaleToFit" name="Image" tint-color="rgb(255, 255, 255)" style="flex-grow: 1; width: 15%; height: 20%; left: 17%; align-self: flex-start; top: -25px; max-height: 30%; rotate: -5deg;"/>
+        </ui:Image>
+        <ui:Button text="YouShouldNotBeAbleToSeeThis" selectable="true" name="button-dossier" style="opacity: 1; flex-grow: 1; visibility: hidden; position: absolute; top: 0%; width: 100%; height: 100%;"/>
+    </ui:VisualElement>
+</ui:UXML>

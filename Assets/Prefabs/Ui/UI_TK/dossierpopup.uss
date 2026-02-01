@@ -1,0 +1,12 @@
+:root {
+}
+
+.dossier-popup {
+    bottom: 49px;
+    top: 90%;
+}
+
+.dossier-popup:hover {
+    top: 80%;
+    transition-duration: 0.5s;
+}
