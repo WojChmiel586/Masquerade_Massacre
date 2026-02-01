@@ -12,6 +12,8 @@ public class GuestDesignController : MonoBehaviour
 	Color m_MaskColour;
 	Color m_TrimColour;
 
+	GuestIdentifiers m_GuestIdentifiers;
+
 	void Start()
 	{
 
@@ -32,19 +34,5 @@ public class GuestDesignController : MonoBehaviour
 		m_HandR.sprite = xHandR;
 		m_Mask.color = xMaskColor;
 		m_Trim.color = xTrim;
-	}
-
-	public bool CompareFeatures( Sprite xMask, Sprite xBody,Color xMaskColor, Color xTrim )
-	{
-		if ( m_Mask.sprite == xMask &&
-		m_Trim.sprite == xMask &&
-		m_Body.sprite == xBody &&
-		m_Mask.color == xMaskColor &&
-		m_Trim.color == xTrim )
-		{
-			return true;
-		}
-		return false;
-		
 	}
 }

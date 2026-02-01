@@ -5,8 +5,11 @@ public class PatrolAgent2D : MonoBehaviour
 {
 	public enum State { IDLE, MOVE, LEAVE, DEAD }
 
-	[Header( "Patrol Area" )]
-	public int m_iAssignedZone;
+	[Header("Guest Identifiers")]
+	public GuestIdentifiers m_GuestIdentifiers;
+	public bool m_IsTheTarget = false;
+
+	[ Header( "Patrol Area" )]
 	public Collider2D m_PatrolArea;
 	public float m_MinMoveDistance = 0.75f;
 	public int m_MaxSampleAttempts = 12;
@@ -22,7 +25,6 @@ public class PatrolAgent2D : MonoBehaviour
 	[SerializeField] List<Color> m_TestColors = new();
 	public Sprite m_ActivityObject;
 	[SerializeField] SpriteRenderer m_HoldingObjectSpriteRenderer;
-	public bool m_IsTheTarget = false;
 
 	[Header("Thinking")]
 	public Vector2 m_ThinkIntervalRange = new Vector2( 0.25f, 0.6f ); // decision cadence (not movement)
@@ -44,6 +46,9 @@ public class PatrolAgent2D : MonoBehaviour
 
 	bool m_bFirstMove;
 
+	[SerializeField]
+	float m_TimeToDie;
+
 	void Start()
 	{
 		m_RigidBody = GetComponent<Rigidbody2D>();
@@ -59,7 +64,17 @@ public class PatrolAgent2D : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if ( m_CurrentState == State.IDLE || m_CurrentState == State.DEAD ) return;
+		if ( m_CurrentState == State.IDLE ) return;
+
+		if( m_CurrentState == State.DEAD )
+		{
+			m_TimeToDie -= Time.deltaTime;
+			if( m_TimeToDie <= 0.0f )
+			{
+				m_FlagForDeletion = true;
+			}
+			return;
+		}
 
 		Vector2 xPos = m_RigidBody.position;
 		Vector2 xDir = ( m_Target - xPos );
@@ -210,5 +225,6 @@ public class PatrolAgent2D : MonoBehaviour
 	public void Shot()
 	{
 		m_CurrentState = State.DEAD;
+		m_Animator.SetBool( "Dead", true );
 	}
 }

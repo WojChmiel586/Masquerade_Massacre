@@ -1,8 +1,59 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+using static UnityEngine.LowLevelPhysics2D.PhysicsBody;
+
+public class GuestIdentifiers : IEquatable<GuestIdentifiers>
+{
+	public int m_iActivity;
+	public int m_iMaskDesign;
+	public int m_iBodyType;
+	public int m_iMaskColor;
+	public int m_iTrimColor;
+
+	public static bool operator ==( GuestIdentifiers xGuest1, GuestIdentifiers xGuest2 )
+	{
+		if ( ReferenceEquals( xGuest1, xGuest2 ) )
+			return true;
+		if ( ReferenceEquals( xGuest1, null ) )
+			return false;
+		if ( ReferenceEquals( xGuest2, null ) )
+			return false;
+		return xGuest1.Equals( xGuest2 );
+	}
+	public static bool operator !=( GuestIdentifiers xGuest1, GuestIdentifiers xGuest2 ) => !( xGuest1 == xGuest2 );
+
+	public bool Equals( GuestIdentifiers xOther )
+	{
+		if ( ReferenceEquals( xOther, null ) )
+			return false;
+		if ( ReferenceEquals( this, xOther ) )
+			return true;
+		return m_iActivity.Equals( xOther.m_iActivity )
+			   && m_iMaskDesign.Equals( xOther.m_iMaskDesign )
+			   && m_iBodyType.Equals( xOther.m_iBodyType )
+			   && m_iMaskColor.Equals( xOther.m_iMaskColor )
+			   && m_iTrimColor.Equals( xOther.m_iTrimColor );
+	}
+	public override bool Equals( object xObj ) => Equals( xObj as GuestIdentifiers );
+
+	public override int GetHashCode()
+	{
+		unchecked
+		{
+			int iHashCode = m_iMaskDesign.GetHashCode();
+			iHashCode = ( iHashCode * 397 ) ^ m_iBodyType.GetHashCode();
+			iHashCode = ( iHashCode * 397 ) ^ m_iMaskColor.GetHashCode();
+			iHashCode = ( iHashCode * 397 ) ^ m_iTrimColor.GetHashCode();
+			return iHashCode;
+		}
+	}
+
+}
 
 public class SpawnManager : MonoBehaviour
 {
@@ -26,11 +77,7 @@ public class SpawnManager : MonoBehaviour
 	public List<Sprite> m_HandsR = new();
 	public List<UnityEngine.Color> m_MaskColours = new();
 
-	int iCurrentTargetAssignedZone;
-	int iCurrentTargetMaskValue;
-	int iCurrentTargetBodyValue;
-	int iMaskColorValue;
-	int iTrimValue;
+	GuestIdentifiers m_CurrentTargetIdentifiers = new();
 
 	void Awake()
 	{
@@ -38,7 +85,7 @@ public class SpawnManager : MonoBehaviour
 
 		for ( int i = 0; i < m_MaxAgents; i++ )
 		{
-			DoorSpawn();
+			InstantSpawn();
 		}
 	}
 
@@ -46,39 +93,37 @@ public class SpawnManager : MonoBehaviour
 	{
 		if ( m_PatrolManager.m_Agents.Count < m_MaxAgents )
 		{
-			DoorSpawn();
+			InstantSpawn();
 		}
 	}
 
-	PatrolAgent2D InstantSpawn( bool bTarget = false )
+	PatrolAgent2D InstantSpawn()
 	{
 		GameObject xNewAgent = Instantiate( m_AgentPrefab, m_SpawnLocation.transform.position, Quaternion.identity, this.transform );
 		PatrolAgent2D xAgentPatrol = xNewAgent.GetComponent<PatrolAgent2D>();
 
-		int iPatrolAreaIndex = -1;
-		int iMaskAttempt = -1;
-		int iBodyType = -1;
-		int iMaskColor = -1;
-		int iMaskTrim = -1;
-
 		bool bSpawn = false;
+		GuestIdentifiers xNewGuestIdentifiers = new();
+		int iAttempts = 0;
+		int iPotentialPatrol = 0;
 		while ( !bSpawn )
 		{
-			iPatrolAreaIndex = Random.Range( 0, m_PatrolAreas.Count );
-			iMaskAttempt = Random.Range( 0, m_Masks.Count );
-			iBodyType = Random.Range( 0, m_Bodies.Count );
-			iMaskColor = Random.Range( 0, m_MaskColours.Count );
-			iMaskTrim = Random.Range( 0, m_MaskColours.Count );
+			iPotentialPatrol = UnityEngine.Random.Range( 0, m_PatrolAreas.Count );
+			xNewGuestIdentifiers.m_iActivity = 
+				( iPotentialPatrol >= m_PatrolActivities.Count || m_PatrolActivities[ iPotentialPatrol ] == null ) ? -1 : iPotentialPatrol;
+			xNewGuestIdentifiers.m_iMaskDesign = UnityEngine.Random.Range( 0, m_Masks.Count );
+			xNewGuestIdentifiers.m_iBodyType = UnityEngine.Random.Range( 0, m_Bodies.Count );
+			xNewGuestIdentifiers.m_iMaskColor = UnityEngine.Random.Range( 0, m_MaskColours.Count );
+			xNewGuestIdentifiers.m_iTrimColor = UnityEngine.Random.Range( 0, m_MaskColours.Count );
 
-			bool bCheckActivity = m_PatrolActivities[ iPatrolAreaIndex ] != null;
-
-			if ( ( bCheckActivity && iCurrentTargetAssignedZone == iPatrolAreaIndex ) &&
-			iCurrentTargetMaskValue == iMaskAttempt &&
-			iCurrentTargetBodyValue == iBodyType &&
-			iMaskColorValue == iMaskColor &&
-			iTrimValue == iMaskTrim )
+			if ( xNewGuestIdentifiers == m_CurrentTargetIdentifiers )
 			{
 				bSpawn = false;
+				iAttempts++;
+				if( iAttempts == 100 )
+				{
+					return null;
+				}
 			}
 			else
 			{
@@ -86,37 +131,37 @@ public class SpawnManager : MonoBehaviour
 			}
 		}
 
-		xAgentPatrol.m_iAssignedZone = iPatrolAreaIndex;
-		xAgentPatrol.m_PatrolArea = m_PatrolAreas[ iPatrolAreaIndex ];
-		xAgentPatrol.m_ActivityObject = m_PatrolActivities[ iPatrolAreaIndex ];
-		Sprite xMask = m_Masks[ iMaskAttempt ];
-		Sprite xBody = m_Bodies[ iBodyType ];
-		Sprite xHandLeft = m_HandsL[ iBodyType ];
-		Sprite xHandRight = m_HandsR[ iBodyType ];
-		UnityEngine.Color xMaskColor = m_MaskColours[ iMaskColor ];
-		UnityEngine.Color xMaskTrim = m_MaskColours[ iMaskTrim ];
+		xAgentPatrol.m_PatrolArea = m_PatrolAreas[ iPotentialPatrol ];
+		if ( xNewGuestIdentifiers.m_iActivity != -1 )
+		{
+			xAgentPatrol.m_ActivityObject = m_PatrolActivities[ xNewGuestIdentifiers.m_iActivity ];
+		}
+
+		xAgentPatrol.m_GuestIdentifiers = xNewGuestIdentifiers;
 
 		xNewAgent.GetComponent<GuestDesignController>().SetGuestElements(
-			xMask, xBody, xHandLeft, xHandRight, xMaskColor, xMaskTrim );
+			m_Masks[ xNewGuestIdentifiers.m_iMaskDesign ],
+			m_Bodies[ xNewGuestIdentifiers.m_iBodyType ],
+			m_HandsL[ xNewGuestIdentifiers.m_iBodyType ],
+			m_HandsR[ xNewGuestIdentifiers.m_iBodyType ],
+			m_MaskColours[ xNewGuestIdentifiers.m_iMaskColor ],
+			m_MaskColours[ xNewGuestIdentifiers.m_iTrimColor ] );
 
 
-		if ( bTarget )
-		{
-			xAgentPatrol.m_IsTheTarget = true;
-			SpawnTarget( iPatrolAreaIndex, iMaskAttempt, iBodyType, iMaskColor, iMaskTrim );
-		}
 
 		m_PatrolManager.AddAgent( xAgentPatrol );
 
-		xAgentPatrol.m_DoorToEnterFrom = m_SpawnAreas[ Random.Range( 0, m_SpawnAreas.Count ) ];
-		xAgentPatrol.m_DoorToLeaveFrom = m_SpawnAreas[ Random.Range( 0, m_SpawnAreas.Count ) ];
+		xAgentPatrol.m_DoorToEnterFrom = m_SpawnAreas[ UnityEngine.Random.Range( 0, m_SpawnAreas.Count ) ];
+		xAgentPatrol.m_DoorToLeaveFrom = m_SpawnAreas[ UnityEngine.Random.Range( 0, m_SpawnAreas.Count ) ];
 
 		return xAgentPatrol;
 	}
 
-	void DoorSpawn()
+	public void SpawnTarget()
 	{
 		PatrolAgent2D xAgent = InstantSpawn();
+		xAgent.m_IsTheTarget = true;
+		SpawnTarget( xAgent.m_GuestIdentifiers );
 	}
 
 	void StartDoorDespawn( PatrolAgent2D xDespawningAgent )
@@ -126,15 +171,12 @@ public class SpawnManager : MonoBehaviour
 
 	public void OnJump()
 	{
-		InstantSpawn( true );
+		SpawnTarget();
 	}
 
-	public void SpawnTarget( int iPatrolAreaIndex, int iMask, int iBody, int iMaskColor, int iTrim )
+	public void SpawnTarget( GuestIdentifiers xGuestIdentifiers )
 	{
-		m_PatrolManager.DeleteSimilarToTargetFeatures( iPatrolAreaIndex, m_Masks[ iMask ], m_Bodies[ iBody ], m_MaskColours[ iMaskColor ], m_MaskColours[ iTrim ] );
-		iCurrentTargetMaskValue = iMask;
-		iCurrentTargetBodyValue = iBody;
-		iMaskColorValue = iMaskColor;
-		iTrimValue = iTrim;
+		m_PatrolManager.DeleteSimilarToTargetFeatures( xGuestIdentifiers );
+		m_CurrentTargetIdentifiers = xGuestIdentifiers;
 	}
 }

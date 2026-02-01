@@ -114,8 +114,7 @@ public class PlayerScript : MonoBehaviour
                     }
 
                 }
-                gunTarget.transform.GetComponentInParent<PatrolAgent2D>().m_FlagForDeletion = true;
-
+                gunTarget.transform.GetComponentInParent<PatrolAgent2D>().Shot();
             }
         }
 

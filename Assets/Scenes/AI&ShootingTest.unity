@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 144990715}
   - component: {fileID: 144990714}
   - component: {fileID: 144990713}
+  - component: {fileID: 144990716}
   m_Layer: 0
   m_Name: Door (1)
   m_TagString: Untagged
@@ -546,6 +547,7 @@ GameObject:
   - component: {fileID: 430611807}
   - component: {fileID: 430611806}
   - component: {fileID: 430611805}
+  - component: {fileID: 430611808}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -673,6 +675,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &430611808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430611804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887acabe54ccc8640803ac1de2d16e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorController
+  m_TimeToHoldDoorOpen: 0
+  m_DoorSpriteRenderer: {fileID: 430611806}
 --- !u!1 &774528814
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,13 +2542,17 @@ PrefabInstance:
       value: AIManager
       objectReference: {fileID: 0}
     - target: {fileID: 1939588533262335436, guid: 9abce92e4bee3514f88cb1dd20d427c3, type: 3}
+      propertyPath: m_SpawnLocation
+      value: 
+      objectReference: {fileID: 226844033}
+    - target: {fileID: 1939588533262335436, guid: 9abce92e4bee3514f88cb1dd20d427c3, type: 3}
       propertyPath: 'm_SpawnAreas.Array.data[0]'
       value: 
-      objectReference: {fileID: 430611805}
+      objectReference: {fileID: 430611808}
     - target: {fileID: 1939588533262335436, guid: 9abce92e4bee3514f88cb1dd20d427c3, type: 3}
       propertyPath: 'm_SpawnAreas.Array.data[1]'
       value: 
-      objectReference: {fileID: 144990713}
+      objectReference: {fileID: 144990716}
     - target: {fileID: 1939588533262335436, guid: 9abce92e4bee3514f88cb1dd20d427c3, type: 3}
       propertyPath: 'm_PatrolAreas.Array.data[0]'
       value: 
@@ -2553,6 +2573,10 @@ PrefabInstance:
       propertyPath: 'm_PatrolAreas.Array.data[4]'
       value: 
       objectReference: {fileID: 2113176715}
+    - target: {fileID: 1939588533262335436, guid: 9abce92e4bee3514f88cb1dd20d427c3, type: 3}
+      propertyPath: m_PatrolActivities.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4567099154814403427, guid: 9abce92e4bee3514f88cb1dd20d427c3, type: 3}
       propertyPath: m_Enabled
       value: 0

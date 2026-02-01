@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169d5689272aadf4cbe85e74c91b7d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PatrolAgent2D
+  m_iAssignedZone: 0
   m_PatrolArea: {fileID: 0}
   m_MinMoveDistance: 0.75
   m_MaxSampleAttempts: 12
@@ -149,18 +150,21 @@ MonoBehaviour:
   m_ChanceStandStill: 0.35
   m_ChanceToLeave: 0.05
   m_ChanceToChooseADifferentActivity: 0.1
-  m_DoorToLeaveFrom: {x: 0, y: 0}
+  m_DoorToEnterFrom: {fileID: 0}
+  m_DoorToLeaveFrom: {fileID: 0}
   m_TestColors:
   - {r: 0.25715178, g: 0.9811321, b: 0, a: 1}
   - {r: 0, g: 0.77571654, b: 1, a: 1}
   - {r: 0.98742133, g: 0, b: 0, a: 1}
   m_ActivityObject: {fileID: 0}
   m_HoldingObjectSpriteRenderer: {fileID: 7119314506426118688}
+  m_IsTheTarget: 0
   m_ThinkIntervalRange: {x: 0.25, y: 0.6}
   m_NextThinkTime: 25.9461
   m_Debug: 0
   m_FlagForDeletion: 0
   m_ForceDelete: 0
+  m_TimeToDie: 2
 --- !u!50 &3103963919152610413
 Rigidbody2D:
   serializedVersion: 5
@@ -341,7 +345,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0.3254902}
+  m_Color: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
